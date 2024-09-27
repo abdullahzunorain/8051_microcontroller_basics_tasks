@@ -1,0 +1,143 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/20/2024  14:46:46  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\Task_12_(d).obj TO .\Objects\Task_12_(d) PRINT (.\Listings\Task_12_(d).m51) RAMSIZ
+>> E (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Task_12_(d).obj (TASK_12__D_)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\Task_12_(d) (TASK_12__D_)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?TASK_12__D_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?C_INITSEG
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    009AH     0081H     UNIT         ?PR?TIMER0?TASK_12__D_
+            CODE    011BH     000DH     UNIT         ?PR?MAIN?TASK_12__D_
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Task_12_(d) (TASK_12__D_)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TASK_12__D_
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Task_12_(d) (TASK_12__D_)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TASK_12__D_
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/20/2024  14:46:46  PAGE 2
+
+
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:011BH         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:008CH         PUBLIC        TH0
+  C:009AH         PUBLIC        timer0
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  D:0008H         PUBLIC        x
+  B:00A0H.0       PUBLIC        pin0
+  B:00A0H.2       PUBLIC        pin1
+  B:00A0H.3       PUBLIC        pin2
+  D:00D0H         PUBLIC        PSW
+  B:00A0H.4       PUBLIC        pin3
+  -------         PROC          TIMER0
+  C:009AH         LINE#         360
+  C:009CH         LINE#         362
+  C:00A4H         LINE#         365
+  C:00AAH         LINE#         366
+  C:00ACH         LINE#         367
+  C:00AEH         LINE#         368
+  C:00B0H         LINE#         369
+  C:00B0H         LINE#         371
+  C:00B8H         LINE#         373
+  C:00BAH         LINE#         374
+  C:00BCH         LINE#         375
+  C:00BEH         LINE#         376
+  C:00BEH         LINE#         378
+  C:00C6H         LINE#         380
+  C:00C8H         LINE#         381
+  C:00CAH         LINE#         382
+  C:00CCH         LINE#         383
+  C:00CCH         LINE#         385
+  C:00D4H         LINE#         387
+  C:00D6H         LINE#         388
+  C:00D8H         LINE#         389
+  C:00DAH         LINE#         390
+  C:00DAH         LINE#         392
+  C:00E2H         LINE#         394
+  C:00E4H         LINE#         395
+  C:00E6H         LINE#         396
+  C:00E8H         LINE#         397
+  C:00E8H         LINE#         399
+  C:00F0H         LINE#         401
+  C:00F2H         LINE#         402
+  C:00F4H         LINE#         403
+  C:00F6H         LINE#         404
+  C:00F6H         LINE#         406
+  C:00FEH         LINE#         408
+  C:0100H         LINE#         409
+  C:0102H         LINE#         410
+  C:0104H         LINE#         411
+  C:0104H         LINE#         413
+  C:010CH         LINE#         415
+  C:010EH         LINE#         416
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/20/2024  14:46:46  PAGE 3
+
+
+  C:0110H         LINE#         417
+  C:0112H         LINE#         418
+  C:0114H         LINE#         419
+  C:0118H         LINE#         420
+  C:0118H         LINE#         421
+  -------         ENDPROC       TIMER0
+  -------         PROC          MAIN
+  C:011BH         LINE#         423
+  C:011BH         LINE#         424
+  C:011EH         LINE#         425
+  C:0121H         LINE#         426
+  C:0124H         LINE#         427
+  C:0126H         LINE#         429
+  C:0126H         LINE#         431
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TASK_12__D_
+
+Program Size: data=11.0 xdata=0 code=293
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

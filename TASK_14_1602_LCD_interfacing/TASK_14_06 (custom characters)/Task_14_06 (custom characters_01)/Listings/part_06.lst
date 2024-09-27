@@ -1,0 +1,556 @@
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE PART_06
+OBJECT MODULE PLACED IN .\Objects\part_06.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE part_06.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\p
+                    -art_06.lst) TABS(2) OBJECT(.\Objects\part_06.obj)
+
+line level    source
+
+   1          
+   2          
+   3          
+   4          
+   5          
+   6          ////#include <reg51.h>  // Include header file for 8051 microcontroller
+   7          
+   8          ////#define lcd_data P0  // Define lcd_data as Port 0 for data lines of the LCD
+   9          
+  10          ////// Define individual bits for control lines connected to Port 2
+  11          ////sbit rs = P2^6;  // Register Select (RS) pin at P2.6
+  12          ////sbit rw = P2^5;  // Read/Write (RW) pin at P2.5
+  13          ////sbit en = P2^7;  // Enable (EN) pin at P2.7
+  14          
+  15          ////// Function prototypes
+  16          ////void lcd_delay();
+  17          ////void lcd_init();
+  18          ////void cmd(unsigned char a);
+  19          ////void dat(unsigned char b);
+  20          ////void show(unsigned char *s);
+  21          ////void store();
+  22          
+  23          ////// Function to introduce a delay for LCD operations
+  24          ////void lcd_delay() {
+  25          ////    unsigned int lcd_delay;
+  26          ////    for(lcd_delay = 0; lcd_delay <= 6000; lcd_delay++);  // Simple for-loop delay
+  27          ////}
+  28          
+  29          ////// Function to initialize the LCD
+  30          ////void lcd_init() {
+  31          ////    cmd(0x38);  // Command for 2 lines and 5x7 matrix
+  32          ////    cmd(0x0c);  // Display on, cursor off
+  33          ////    cmd(0x06);  // Increment cursor
+  34          ////    cmd(0x01);  // Clear display screen
+  35          ////    cmd(0x80);  // Force cursor to beginning of first line
+  36          ////}
+  37          
+  38          ////// Function to send a command to the LCD
+  39          ////void cmd(unsigned char a) {
+  40          ////    lcd_data = a;  // Put command on data port
+  41          ////    rs = 0;  // Select command register
+  42          ////    rw = 0;  // Write operation
+  43          ////    en = 1;  // Enable the LCD
+  44          ////    lcd_delay();  // Wait for the command to be processed
+  45          ////    en = 0;  // Disable the LCD
+  46          ////}
+  47          
+  48          ////// Function to send data to the LCD
+  49          ////void dat(unsigned char b) {
+  50          ////    lcd_data = b;  // Put data on data port
+  51          ////    rs = 1;  // Select data register
+  52          ////    rw = 0;  // Write operation
+  53          ////    en = 1;  // Enable the LCD
+  54          ////    lcd_delay();  // Wait for the data to be processed
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 2   
+
+  55          ////    en = 0;  // Disable the LCD
+  56          ////}
+  57          
+  58          ////// Function to display a string on the LCD
+  59          ////void show(unsigned char *s) {
+  60          ////    while(*s) {  // Loop through each character in the string
+  61          ////        dat(*s++);  // Send each character to the LCD
+  62          ////    }
+  63          ////}
+  64          
+  65          ////// Function to store custom characters in CGRAM
+  66          ////void store() {
+  67          ////    // Store custom character at location 0
+  68          ////    cmd(64);  // Set CGRAM address to 0x40
+  69          ////    dat(0);  // First row of custom character
+  70          ////    dat(10);  // Second row of custom character
+  71          ////    dat(21);  // Third row of custom character
+  72          ////    dat(17);  // Fourth row of custom character
+  73          ////    dat(10);  // Fifth row of custom character
+  74          ////    dat(4);  // Sixth row of custom character
+  75          ////    dat(0);  // Seventh row of custom character
+  76          ////    dat(0);  // Eighth row of custom character
+  77          ////    cmd(0xc0); // Move to DDRAM address 0xC0 (second line)
+  78          ////    dat(0);  // Display custom character stored at location 0
+  79          ////    lcd_delay();
+  80          
+  81          ////    // Store custom character at location 1
+  82          ////    cmd(72);  // Set CGRAM address to 0x48
+  83          ////    dat(4);  // First row of custom character
+  84          ////    dat(14);  // Second row of custom character
+  85          ////    dat(14);  // Third row of custom character
+  86          ////    dat(14);  // Fourth row of custom character
+  87          ////    dat(31);  // Fifth row of custom character
+  88          ////    dat(0);  // Sixth row of custom character
+  89          ////    dat(4);  // Seventh row of custom character
+  90          ////    dat(0);  // Eighth row of custom character
+  91          ////    cmd(0xc2); // Move to DDRAM address 0xC2
+  92          ////    dat(1);  // Display custom character stored at location 1
+  93          ////    lcd_delay();
+  94          
+  95          ////    // Store custom character at location 2
+  96          ////    cmd(80);  // Set CGRAM address to 0x50
+  97          ////    dat(31);  // First row of custom character
+  98          ////    dat(21);  // Second row of custom character
+  99          ////    dat(31);  // Third row of custom character
+ 100          ////    dat(31);  // Fourth row of custom character
+ 101          ////    dat(14);  // Fifth row of custom character
+ 102          ////    dat(10);  // Sixth row of custom character
+ 103          ////    dat(27);  // Seventh row of custom character
+ 104          ////    dat(0);  // Eighth row of custom character
+ 105          ////    cmd(0xc4); // Move to DDRAM address 0xC4
+ 106          ////    dat(2);  // Display custom character stored at location 2
+ 107          ////    lcd_delay();
+ 108          
+ 109          ////    // Store custom character at location 3
+ 110          ////    cmd(88);  // Set CGRAM address to 0x58
+ 111          ////    dat(0);  // First row of custom character
+ 112          ////    dat(1);  // Second row of custom character
+ 113          ////    dat(3);  // Third row of custom character
+ 114          ////    dat(22);  // Fourth row of custom character
+ 115          ////    dat(28);  // Fifth row of custom character
+ 116          ////    dat(8);  // Sixth row of custom character
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 3   
+
+ 117          ////    dat(0);  // Seventh row of custom character
+ 118          ////    dat(0);  // Eighth row of custom character
+ 119          ////    cmd(0xc6); // Move to DDRAM address 0xC6
+ 120          ////    dat(3);  // Display custom character stored at location 3
+ 121          ////    lcd_delay();
+ 122          
+ 123          ////    // Store custom character at location 4
+ 124          ////    cmd(96);  // Set CGRAM address to 0x60
+ 125          ////    dat(1);  // First row of custom character
+ 126          ////    dat(3);  // Second row of custom character
+ 127          ////    dat(15);  // Third row of custom character
+ 128          ////    dat(15);  // Fourth row of custom character
+ 129          ////    dat(15);  // Fifth row of custom character
+ 130          ////    dat(3);  // Sixth row of custom character
+ 131          ////    dat(1);  // Seventh row of custom character
+ 132          ////    dat(0);  // Eighth row of custom character
+ 133          ////    cmd(0xc8); // Move to DDRAM address 0xC8
+ 134          ////    dat(4);  // Display custom character stored at location 4
+ 135          ////    lcd_delay();
+ 136          
+ 137          ////    // Store custom character at location 5
+ 138          ////    cmd(104);  // Set CGRAM address to 0x68
+ 139          ////    dat(1);  // First row of custom character
+ 140          ////    dat(3);  // Second row of custom character
+ 141          ////    dat(5);  // Third row of custom character
+ 142          ////    dat(9);  // Fourth row of custom character
+ 143          ////    dat(9);  // Fifth row of custom character
+ 144          ////    dat(11);  // Sixth row of custom character
+ 145          ////    dat(27);  // Seventh row of custom character
+ 146          ////    dat(24);  // Eighth row of custom character
+ 147          ////    cmd(0xca); // Move to DDRAM address 0xCA
+ 148          ////    dat(5);  // Display custom character stored at location 5
+ 149          ////    lcd_delay();
+ 150          
+ 151          ////    // Store custom character at location 6
+ 152          ////    cmd(112);  // Set CGRAM address to 0x70
+ 153          ////    dat(0);  // First row of custom character
+ 154          ////    dat(14);  // Second row of custom character
+ 155          ////    dat(21);  // Third row of custom character
+ 156          ////    dat(27);  // Fourth row of custom character
+ 157          ////    dat(14);  // Fifth row of custom character
+ 158          ////    dat(14);  // Sixth row of custom character
+ 159          ////    dat(0);  // Seventh row of custom character
+ 160          ////    dat(0);  // Eighth row of custom character
+ 161          ////    cmd(0xcc); // Move to DDRAM address 0xCC
+ 162          ////    dat(6);  // Display custom character stored at location 6
+ 163          ////    lcd_delay();
+ 164          
+ 165          ////    // Store custom character at location 7
+ 166          ////    cmd(120);  // Set CGRAM address to 0x78
+ 167          ////    dat(14);  // First row of custom character
+ 168          ////    dat(17);  // Second row of custom character
+ 169          ////    dat(17);  // Third row of custom character
+ 170          ////    dat(31);  // Fourth row of custom character
+ 171          ////    dat(27);  // Fifth row of custom character
+ 172          ////    dat(27);  // Sixth row of custom character
+ 173          ////    dat(31);  // Seventh row of custom character
+ 174          ////    dat(0);  // Eighth row of custom character
+ 175          ////    cmd(0xce); // Move to DDRAM address 0xCE
+ 176          ////    dat(7);  // Display custom character stored at location 7
+ 177          ////    lcd_delay();
+ 178          ////}
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 4   
+
+ 179          
+ 180          ////// Main function
+ 181          ////void main() {
+ 182          ////    lcd_init();  // Initialize the LCD
+ 183          ////    show("CUSTOM CHARACTER");  // Display the string "CUSTOM CHARACTER"
+ 184          ////    while(1) {  // Infinite loop
+ 185          ////        store();  // Continuously store and display custom characters
+ 186          ////    }
+ 187          ////}
+ 188          
+ 189          
+ 190          
+ 191          
+ 192          //--------------------------------------------------------------------------------------------------------
+             ---------------------------------------------
+ 193          
+ 194          
+ 195          
+ 196          
+ 197          
+ 198          #include <reg51.h>  // Include header file for 8051 microcontroller
+ 199          
+ 200          #define lcd_data P0  // Define lcd_data as Port 0 for data lines of the LCD
+ 201          
+ 202          // Define individual bits for control lines connected to Port 2
+ 203          sbit rs = P2^6;  // Register Select (RS) pin at P2.6
+ 204          sbit rw = P2^5;  // Read/Write (RW) pin at P2.5
+ 205          sbit en = P2^7;  // Enable (EN) pin at P2.7
+ 206          
+ 207          // Function prototypes
+ 208          void lcd_delay();
+ 209          void lcd_init();
+ 210          void cmd(unsigned char a);
+ 211          void dat(unsigned char b);
+ 212          void show(unsigned char *s);
+ 213          void store();
+ 214          
+ 215          // Function to introduce a delay for LCD operations
+ 216          void lcd_delay() {
+ 217   1          unsigned int lcd_delay;
+ 218   1          for(lcd_delay = 0; lcd_delay <= 6000; lcd_delay++);  // Simple for-loop delay
+ 219   1      }
+ 220          
+ 221          // Function to initialize the LCD
+ 222          void lcd_init() {
+ 223   1          cmd(0x38);  // Command for 2 lines and 5x7 matrix
+ 224   1          cmd(0x0c);  // Display on, cursor off
+ 225   1          cmd(0x06);  // Increment cursor
+ 226   1          cmd(0x01);  // Clear display screen
+ 227   1          cmd(0x80);  // Force cursor to beginning of first line
+ 228   1      }
+ 229          
+ 230          // Function to send a command to the LCD
+ 231          void cmd(unsigned char a) {
+ 232   1          lcd_data = a;  // Put command on data port
+ 233   1          rs = 0;  // Select command register
+ 234   1          rw = 0;  // Write operation
+ 235   1          en = 1;  // Enable the LCD
+ 236   1          lcd_delay();  // Wait for the command to be processed
+ 237   1          en = 0;  // Disable the LCD
+ 238   1      }
+ 239          
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 5   
+
+ 240          // Function to send data to the LCD
+ 241          void dat(unsigned char b) {
+ 242   1          lcd_data = b;  // Put data on data port
+ 243   1          rs = 1;  // Select data register
+ 244   1          rw = 0;  // Write operation
+ 245   1          en = 1;  // Enable the LCD
+ 246   1          lcd_delay();  // Wait for the data to be processed
+ 247   1          en = 0;  // Disable the LCD
+ 248   1      }
+ 249          
+ 250          // Function to display a string on the LCD
+ 251          void show(unsigned char *s) {
+ 252   1          while(*s) {  // Loop through each character in the string
+ 253   2              dat(*s++);  // Send each character to the LCD
+ 254   2          }
+ 255   1      }
+ 256          
+ 257          // Function to store custom characters in CGRAM
+ 258          void store() {
+ 259   1          // Store custom character at location 0
+ 260   1          cmd(64);  // Set CGRAM address to 0x40
+ 261   1          dat(0);  // First row of custom character
+ 262   1          dat(10);  // Second row of custom character
+ 263   1          dat(21);  // Third row of custom character
+ 264   1          dat(17);  // Fourth row of custom character
+ 265   1          dat(10);  // Fifth row of custom character
+ 266   1          dat(4);  // Sixth row of custom character
+ 267   1          dat(0);  // Seventh row of custom character
+ 268   1          dat(0);  // Eighth row of custom character
+ 269   1          cmd(0xc0); // Move to DDRAM address 0xC0 (second line)
+ 270   1          dat(0);  // Display custom character stored at location 0
+ 271   1          lcd_delay();
+ 272   1      
+ 273   1          // Store custom character at location 1
+ 274   1          cmd(72);  // Set CGRAM address to 0x48
+ 275   1          dat(4);  // First row of custom character
+ 276   1          dat(14);  // Second row of custom character
+ 277   1          dat(14);  // Third row of custom character
+ 278   1          dat(14);  // Fourth row of custom character
+ 279   1          dat(31);  // Fifth row of custom character
+ 280   1          dat(0);  // Sixth row of custom character
+ 281   1          dat(4);  // Seventh row of custom character
+ 282   1          dat(0);  // Eighth row of custom character
+ 283   1          cmd(0xc1); // Move to DDRAM address 0xC2
+ 284   1          dat(1);  // Display custom character stored at location 1
+ 285   1          lcd_delay();
+ 286   1      
+ 287   1          // Store custom character at location 2
+ 288   1          cmd(80);  // Set CGRAM address to 0x50
+ 289   1          dat(31);  // First row of custom character
+ 290   1          dat(21);  // Second row of custom character
+ 291   1          dat(31);  // Third row of custom character
+ 292   1          dat(31);  // Fourth row of custom character
+ 293   1          dat(14);  // Fifth row of custom character
+ 294   1          dat(10);  // Sixth row of custom character
+ 295   1          dat(27);  // Seventh row of custom character
+ 296   1          dat(0);  // Eighth row of custom character
+ 297   1          cmd(0xc2); // Move to DDRAM address 0xC4
+ 298   1          dat(2);  // Display custom character stored at location 2
+ 299   1          lcd_delay();
+ 300   1      
+ 301   1          // Store custom character at location 3
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 6   
+
+ 302   1          cmd(88);  // Set CGRAM address to 0x58
+ 303   1          dat(0);  // First row of custom character
+ 304   1          dat(1);  // Second row of custom character
+ 305   1          dat(3);  // Third row of custom character
+ 306   1          dat(22);  // Fourth row of custom character
+ 307   1          dat(28);  // Fifth row of custom character
+ 308   1          dat(8);  // Sixth row of custom character
+ 309   1          dat(0);  // Seventh row of custom character
+ 310   1          dat(0);  // Eighth row of custom character
+ 311   1          cmd(0xc3); // Move to DDRAM address 0xC6
+ 312   1          dat(3);  // Display custom character stored at location 3
+ 313   1          lcd_delay();
+ 314   1      
+ 315   1          // Store custom character at location 4
+ 316   1          cmd(96);  // Set CGRAM address to 0x60
+ 317   1          dat(1);  // First row of custom character
+ 318   1          dat(3);  // Second row of custom character
+ 319   1          dat(15);  // Third row of custom character
+ 320   1          dat(15);  // Fourth row of custom character
+ 321   1          dat(15);  // Fifth row of custom character
+ 322   1          dat(3);  // Sixth row of custom character
+ 323   1          dat(1);  // Seventh row of custom character
+ 324   1          dat(0);  // Eighth row of custom character
+ 325   1          cmd(0xc4); // Move to DDRAM address 0xC8
+ 326   1          dat(4);  // Display custom character stored at location 4
+ 327   1          lcd_delay();
+ 328   1      
+ 329   1          // Store custom character at location 5
+ 330   1          cmd(104);  // Set CGRAM address to 0x68
+ 331   1          dat(1);  // First row of custom character
+ 332   1          dat(3);  // Second row of custom character
+ 333   1          dat(5);  // Third row of custom character
+ 334   1          dat(9);  // Fourth row of custom character
+ 335   1          dat(9);  // Fifth row of custom character
+ 336   1          dat(11);  // Sixth row of custom character
+ 337   1          dat(27);  // Seventh row of custom character
+ 338   1          dat(24);  // Eighth row of custom character
+ 339   1          cmd(0xc5); // Move to DDRAM address 0xCA
+ 340   1          dat(5);  // Display custom character stored at location 5
+ 341   1          lcd_delay();
+ 342   1      
+ 343   1          // Store custom character at location 6
+ 344   1          cmd(112);  // Set CGRAM address to 0x70
+ 345   1          dat(0);  // First row of custom character
+ 346   1          dat(14);  // Second row of custom character
+ 347   1          dat(21);  // Third row of custom character
+ 348   1          dat(27);  // Fourth row of custom character
+ 349   1          dat(14);  // Fifth row of custom character
+ 350   1          dat(14);  // Sixth row of custom character
+ 351   1          dat(0);  // Seventh row of custom character
+ 352   1          dat(0);  // Eighth row of custom character
+ 353   1          cmd(0xc6); // Move to DDRAM address 0xCC
+ 354   1          dat(6);  // Display custom character stored at location 6
+ 355   1          lcd_delay();
+ 356   1      
+ 357   1          // Store custom character at location 7
+ 358   1          cmd(120);  // Set CGRAM address to 0x78
+ 359   1          dat(14);  // First row of custom character
+ 360   1          dat(17);  // Second row of custom character
+ 361   1          dat(17);  // Third row of custom character
+ 362   1          dat(31);  // Fourth row of custom character
+ 363   1          dat(27);  // Fifth row of custom character
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 7   
+
+ 364   1          dat(27);  // Sixth row of custom character
+ 365   1          dat(31);  // Seventh row of custom character
+ 366   1          dat(0);  // Eighth row of custom character
+ 367   1          cmd(0xc7); // Move to DDRAM address 0xCE
+ 368   1          dat(7);  // Display custom character stored at location 7
+ 369   1          lcd_delay();
+ 370   1          
+ 371   1          
+ 372   1      }
+ 373          
+ 374          // Main function
+ 375          void main() {
+ 376   1          
+ 377   1          while(1) {  // Infinite loop
+ 378   2              lcd_init();  // Initialize the LCD
+ 379   2              show("CUSTOM CHARACTER");  // Display the string "CUSTOM CHARACTER"
+ 380   2              store();  // Continuously store and display custom characters
+ 381   2          }
+ 382   1      }
+ 383          
+ 384          
+ 385          
+ 386          
+ 387          
+ 388          
+ 389          
+ 390          
+ 391          
+ 392          
+ 393          
+ 394          //--------------------------------------------------------------------------------------------------------
+             -----------------------------------
+ 395          
+ 396          
+ 397          
+ 398          
+ 399          
+ 400          
+ 401          
+ 402          
+ 403          
+ 404          
+ 405          
+ 406          
+ 407          
+ 408          
+ 409          
+ 410          
+ 411          //#include <reg51.h>  // Include header file for 8051 microcontroller
+ 412          
+ 413          //#define lcd_data P0  // Define lcd_data as Port 0 for data lines of the LCD
+ 414          
+ 415          //// Define individual bits for control lines connected to Port 2
+ 416          //sbit rs = P2^6;  // Register Select (RS) pin at P2.6
+ 417          //sbit rw = P2^5;  // Read/Write (RW) pin at P2.5
+ 418          //sbit en = P2^7;  // Enable (EN) pin at P2.7
+ 419          
+ 420          //// Function prototypes
+ 421          //void lcd_delay();
+ 422          //void lcd_init();
+ 423          //void cmd(unsigned char a);
+ 424          //void dat(unsigned char b);
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 8   
+
+ 425          //void show(unsigned char *s);
+ 426          //void store();
+ 427          
+ 428          //// Function to introduce a delay for LCD operations
+ 429          //void lcd_delay() {
+ 430          //    unsigned int lcd_delay;
+ 431          //    for(lcd_delay = 0; lcd_delay <= 6000; lcd_delay++);  // Simple for-loop delay
+ 432          //}
+ 433          
+ 434          //// Function to initialize the LCD
+ 435          //void lcd_init() {
+ 436          //    cmd(0x38);  // Command for 2 lines and 5x7 matrix
+ 437          //    cmd(0x0c);  // Display on, cursor off
+ 438          //    cmd(0x06);  // Increment cursor
+ 439          //    cmd(0x01);  // Clear display screen
+ 440          //    cmd(0x80);  // Force cursor to beginning of first line
+ 441          //}
+ 442          
+ 443          //// Function to send a command to the LCD
+ 444          //void cmd(unsigned char a) {
+ 445          //    lcd_data = a;  // Put command on data port
+ 446          //    rs = 0;  // Select command register
+ 447          //    rw = 0;  // Write operation
+ 448          //    en = 1;  // Enable the LCD
+ 449          //    lcd_delay();  // Wait for the command to be processed
+ 450          //    en = 0;  // Disable the LCD
+ 451          //}
+ 452          
+ 453          //// Function to send data to the LCD
+ 454          //void dat(unsigned char b) {
+ 455          //    lcd_data = b;  // Put data on data port
+ 456          //    rs = 1;  // Select data register
+ 457          //    rw = 0;  // Write operation
+ 458          //    en = 1;  // Enable the LCD
+ 459          //    lcd_delay();  // Wait for the data to be processed
+ 460          //    en = 0;  // Disable the LCD
+ 461          //}
+ 462          
+ 463          //// Function to display a string on the LCD
+ 464          //void show(unsigned char *s) {
+ 465          //    while(*s) {  // Loop through each character in the string
+ 466          //        dat(*s++);  // Send each character to the LCD
+ 467          //    }
+ 468          //}
+ 469          
+ 470          //// Function to store custom characters in CGRAM
+ 471          //void store() {
+ 472          //    // Store custom character at location 0
+ 473          //    cmd(0x67);  // Set CGRAM address to 0x40
+ 474          //    dat(0);  // First row of custom character
+ 475          //    dat(10);  // Second row of custom character
+ 476          //    dat(21);  // Third row of custom character
+ 477          //    dat(17);  // Fourth row of custom character
+ 478          //    dat(10);  // Fifth row of custom character
+ 479          //    dat(4);  // Sixth row of custom character
+ 480          //    dat(0);  // Seventh row of custom character
+ 481          //    dat(0);  // Eighth row of custom character
+ 482          //    cmd(0xCF); // Move to DDRAM address 0xC0 (second line)
+ 483          //    dat(15);  // Display custom character stored at location 0
+ 484          //    lcd_delay();
+ 485          //}
+ 486          
+C51 COMPILER V9.60.7.0   PART_06                                                           05/29/2024 12:43:40 PAGE 9   
+
+ 487          //// Main function
+ 488          //void main() {
+ 489          //    lcd_init();  // Initialize the LCD
+ 490          ////    show("CUSTOM CHARACTER");  // Display the string "CUSTOM CHARACTER"
+ 491          //    while(1) {  // Infinite loop
+ 492          ////        cmd(0xc3);
+ 493          //        store();  // Continuously store and display custom characters
+ 494          ////      cmd(2);
+ 495          //    }
+ 496          //}
+ 497          
+ 498          
+ 499          
+ 500          
+ 501          
+ 502          
+ 503          
+ 504          
+ 505          
+ 506          
+ 507          
+ 508          
+ 509          
+ 510          
+ 511          
+ 512          
+ 513          
+ 514          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    538    ----
+   CONSTANT SIZE    =     17    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,233 @@
+C51 COMPILER V9.60.7.0   TASK_14                                                           05/25/2024 12:35:52 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_14
+OBJECT MODULE PLACED IN .\Objects\task_14.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_14.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\t
+                    -ask_14.lst) TABS(2) OBJECT(.\Objects\task_14.obj)
+
+line level    source
+
+   1          
+   2          ////////#include <reg51.h>
+   3          
+   4          ////////sbit rs = P2^6;
+   5          ////////sbit rw = P2^5;
+   6          ////////sbit en = P2^7;
+   7          
+   8          ////////#define text P0
+   9          
+  10          ////////void delay() {
+  11          ////////    int i, j;
+  12          ////////    for(i = 0; i < 50; i++) {
+  13          ////////        for (j = 0; j < 100; j++);
+  14          ////////    }
+  15          ////////}
+  16          
+  17          
+  18          
+  19          ////////void lcd_cmd(unsigned char a) {
+  20          ////////    text = a;
+  21          ////////    rs = 0;
+  22          ////////    rw = 0;
+  23          ////////    en = 1;
+  24          ////////    delay();
+  25          ////////    en = 0;
+  26          ////////}
+  27          
+  28          ////////void lcd_data(unsigned char b) {
+  29          ////////    text = b;
+  30          ////////    rs = 1;
+  31          ////////    rw = 0;
+  32          ////////    en = 1;
+  33          ////////    delay();
+  34          ////////    en = 0;
+  35          ////////}
+  36          
+  37          ////////void lcd_init() {
+  38          ////////    lcd_cmd(0x01);
+  39          ////////    delay();
+  40          ////////    lcd_cmd(0x38);
+  41          ////////    delay();
+  42          ////////    lcd_cmd(0x0E);
+  43          ////////    delay();
+  44          ////////    lcd_cmd(0x10);
+  45          ////////    delay();
+  46          ////////    lcd_cmd(0x80);
+  47          ////////    delay();
+  48          ////////}
+  49          
+  50          ////////int main() {
+  51          ////////    text = 0x00;
+  52          ////////    lcd_init();
+  53          ////////    
+  54          ////////    lcd_data('Z');
+C51 COMPILER V9.60.7.0   TASK_14                                                           05/25/2024 12:35:52 PAGE 2   
+
+  55          ////////    delay();
+  56          
+  57          ////////     
+  58          ////////    
+  59          ////////    return 0;        
+  60          ////////}
+  61          
+  62          
+  63          
+  64          
+  65          //________________________________________________________________________________________________________
+             -_______________________________
+  66          
+  67          
+  68          
+  69          //#include <reg51.h>  // Include the header file for 8051 microcontroller registers and definitions
+  70          
+  71          //sbit rs = P2^6;    // Define the register select pin as bit 6 of port 2
+  72          //sbit rw = P2^5;    // Define the read/write pin as bit 5 of port 2
+  73          //sbit en = P2^7;    // Define the enable pin as bit 7 of port 2
+  74          
+  75          //#define text P0    // Define the data port for the LCD as port 0
+  76          
+  77          //// Delay function to create a short delay
+  78          //void delay() {
+  79          //    int i, j;
+  80          //    for(i = 0; i < 100; i++) {
+  81          //        for (j = 0; j < 100; j++);
+  82          //    }
+  83          //}
+  84          
+  85          //// Add lcd_delay function prototype
+  86          //void lcd_delay();
+  87          
+  88          //// Define lcd_delay function to create a delay for LCD timing
+  89          //void lcd_delay() {
+  90          //    delay();
+  91          //}
+  92          
+  93          //// Function to send a command to the LCD
+  94          //void lcd_cmd(unsigned char a) {
+  95          //    text = a;    // Put the command on the data port
+  96          //    rs = 0;      // Select command register (RS=0)
+  97          //    rw = 0;      // Select write operation (RW=0)
+  98          //    en = 1;      // Generate a high-to-low pulse on the enable pin
+  99          //    lcd_delay(); // Wait for the command to be processed
+ 100          //    en = 0;      // End the enable pulse
+ 101          //}
+ 102          
+ 103          //// Function to send data to the LCD
+ 104          //void lcd_data(unsigned char b) {
+ 105          //    text = b;    // Put the data on the data port
+ 106          //    rs = 1;      // Select data register (RS=1)
+ 107          //    rw = 0;      // Select write operation (RW=0)
+ 108          //    en = 1;      // Generate a high-to-low pulse on the enable pin
+ 109          //    lcd_delay(); // Wait for the data to be processed
+ 110          //    en = 0;      // End the enable pulse
+ 111          //}
+ 112          
+ 113          //// Function to initialize the LCD
+ 114          //void lcd_init() {
+ 115          //    lcd_cmd(0x01); // Clear the display
+C51 COMPILER V9.60.7.0   TASK_14                                                           05/25/2024 12:35:52 PAGE 3   
+
+ 116          //    delay();       // Wait for the command to be processed
+ 117          //    lcd_cmd(0x38); // Set LCD to 8-bit mode, 2 lines, 5x7 matrix
+ 118          //    delay();       // Wait for the command to be processed
+ 119          //    lcd_cmd(0x0E); // Display ON, cursor ON
+ 120          //    delay();       // Wait for the command to be processed
+ 121          //    lcd_cmd(0x10); // Shift cursor position to the left
+ 122          //    delay();       // Wait for the command to be processed
+ 123          //    lcd_cmd(0x80); // Set cursor position to the beginning of the first line
+ 124          //    delay();       // Wait for the command to be processed
+ 125          //}
+ 126          
+ 127          //// Main function
+ 128          //int main() {
+ 129          //    text = 0x00;   // Clear the data port
+ 130          //    lcd_init();    // Initialize the LCD
+ 131          //    
+ 132          //    // Write 'Z' to the LCD
+ 133          //    lcd_data('Z');
+ 134          //    delay();       // Wait for the data to be processed
+ 135          
+ 136          //    // Write 'U' to the LCD
+ 137          //    lcd_data('U');
+ 138          //    delay();       // Wait for the data to be processed
+ 139          
+ 140          //    // Write 'L' to the LCD
+ 141          //    lcd_data('L');
+ 142          //    delay();       // Wait for the data to be processed    
+ 143          //    
+ 144          //    // Write 'Q' to the LCD
+ 145          //    lcd_data('Q');
+ 146          //    delay();       // Wait for the data to be processed
+ 147          
+ 148          //    // Write 'A' to the LCD
+ 149          //    lcd_data('A');
+ 150          //    delay();       // Wait for the data to be processed   
+ 151          
+ 152          //    // Write 'R' to the LCD
+ 153          //    lcd_data('R');
+ 154          //    delay();       // Wait for the data to be processed
+ 155          //    
+ 156          //    // Write 'N' to the LCD
+ 157          //    lcd_data('N');
+ 158          //    delay();       // Wait for the data to be processed    
+ 159          
+ 160          //    // Write 'A' to the LCD
+ 161          //    lcd_data('A');
+ 162          //    delay();       // Wait for the data to be processed    
+ 163          //    
+ 164          //    // Write 'I' to the LCD
+ 165          //    lcd_data('I');
+ 166          //    delay();       // Wait for the data to be processed    
+ 167          //    
+ 168          //    // Write 'N' to the LCD
+ 169          //    lcd_data('N');
+ 170          //    delay();       // Wait for the data to be processed    
+ 171          
+ 172          //    // Return 0 to indicate successful execution
+ 173          //    return 0;        
+ 174          //}
+ 175          
+ 176          
+ 177          
+C51 COMPILER V9.60.7.0   TASK_14                                                           05/25/2024 12:35:52 PAGE 4   
+
+ 178          
+ 179          
+ 180          
+ 181          
+ 182          //________________________________________________________________________________________________________
+             -____________________
+ 183          
+ 184          
+ 185          
+ 186          
+ 187          
+ 188          
+ 189          #include "lcd.h"
+*** WARNING C318 IN LINE 189 OF task_14.c: can't open file 'lcd.h'
+ 190          
+ 191          int main() {
+ 192   1          lcd_init(); // Initialize the LCD
+*** WARNING C206 IN LINE 192 OF task_14.c: 'lcd_init': missing function-prototype
+ 193   1      
+ 194   1          // Example usage
+ 195   1          lcd_write(0, 0, 'H');  // Write 'H' at the beginning of the first line
+*** WARNING C206 IN LINE 195 OF task_14.c: 'lcd_write': missing function-prototype
+*** ERROR C267 IN LINE 195 OF task_14.c: 'lcd_write': requires ANSI-style prototype
+ 196   1          lcd_write(0, 1, 'e');  // Write 'e' at the second position of the first line
+ 197   1          lcd_write(0, 2, 'l');  // Write 'l' at the third position of the first line
+ 198   1          lcd_write(0, 3, 'l');  // Write 'l' at the fourth position of the first line
+ 199   1          lcd_write(0, 4, 'o');  // Write 'o' at the fifth position of the first line
+ 200   1      
+ 201   1          lcd_set_cursor(1, 0);  // Set cursor to the beginning of the second line
+ 202   1          lcd_write(1, 0, 'W');  // Write 'W' at the beginning of the second line
+ 203   1          lcd_write(1, 1, 'o');  // Write 'o' at the second position of the second line
+ 204   1          lcd_write(1, 2, 'r');  // Write 'r' at the third position of the second line
+ 205   1          lcd_write(1, 3, 'l');  // Write 'l' at the fourth position of the second line
+ 206   1          lcd_write(1, 4, 'd');  // Write 'd' at the fifth position of the second line
+ 207   1      
+ 208   1          while(1); // Infinite loop to keep the microcontroller running
+ 209   1      }
+
+C51 COMPILATION COMPLETE.  3 WARNING(S),  1 ERROR(S)

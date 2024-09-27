@@ -1,0 +1,210 @@
+C51 COMPILER V9.60.7.0   TASK_15_2                                                         09/23/2024 10:30:45 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_15_2
+OBJECT MODULE PLACED IN .\Objects\Task_15_2.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Task_15_2.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\Task_15_2.lst) TABS(2) OBJECT(.\Objects\Task_15_2.obj)
+
+line level    source
+
+   1          /*
+   2          TASK_15_02:
+   3          Write a program to send data to PC from the microcontroller using serial port at 9600 baud rate. 
+   4          Send any message like “Hello world”. Use \n\r to see how it takes the cursor to a new 
+   5          line on the Hercules software e.g “Hello world\n\r”
+   6          */
+   7          
+   8          
+   9          /*
+  10          //To write a program that sends data from a microcontroller to a PC using the serial port at 9600 baud rat
+             -e, 
+  11          //you can use the following C code. This program is designed for the 8051 microcontroller (using the Keil 
+             -compiler), 
+  12          //and it will send the message "Hello world" followed by a newline and carriage return ("\n\r") to a PC. 
+  13          //The delay function ensures there is enough time for each character to be transmitted.
+  14          */
+  15          
+  16          
+  17          /*1st Method:*/
+  18          
+  19          //////    #include <reg51.h>
+  20          
+  21          //////    void delay(unsigned int itime) {
+  22          //////        int i, j;
+  23          //////        for (i = 0; i < itime; i++) {
+  24          //////            for (j = 0; j < 114; j++);
+  25          //////        }
+  26          //////    }
+  27          
+  28          //////    unsigned int u = 0;
+  29          
+  30          //////    void main() {
+  31          //////        unsigned char Mystring[] = "Hello World \n\r";  // The message to be sent
+  32          
+  33          //////        TMOD = 0x20;  // Timer1 in Mode2 (8-bit auto-reload)
+  34          //////        TH1 = 0xFD;   // Baud rate 9600 for 11.0592 MHz
+  35          //////        SCON = 0x50;  // Serial mode 1, 8-data bit, 1 stop bit, REN enabled
+  36          //////        TR1 = 1;      // Start Timer1
+  37          
+  38          //////        for (u = 0; u < 14; u++) {
+  39          //////            SBUF = Mystring[u];  // Load the character to SBUF
+  40          //////            while (TI == 0);     // Wait until the transmission is complete
+  41          //////            TI = 0;              // Clear the TI flag
+  42          //////        }
+  43          
+  44          //////        delay(300);  // Wait for a while to ensure transmission is complete
+  45          //////    }
+  46          
+  47          
+  48          
+  49          
+  50          //--------------------------------------------------------------------------------------------------------
+             ------------------------------------------------------------------------------------------------------
+  51          
+C51 COMPILER V9.60.7.0   TASK_15_2                                                         09/23/2024 10:30:45 PAGE 2   
+
+  52          
+  53          
+  54          //  /*2nd Method*/
+  55          
+  56          //  #include <reg51.h>
+  57          
+  58          //  // Delay function
+  59          //  void delay(unsigned int itime) {
+  60          //      int i, j;
+  61          //      for(i = 0; i < itime; i++)
+  62          //          for(j = 0; j < 114; j++);
+  63          //  }
+  64          
+  65          //  void main() {
+  66          //      unsigned char Mystring[] = "Abdullah Zunorain is here \n\r";  // The message to be sent
+  67          //      unsigned char u = 0;
+  68          
+  69          //      TMOD = 0x20;  // Timer1 in Mode2 (8-bit auto-reload)
+  70          //      TH1 = 0xFD;   // Baud rate 9600 for 11.0592 MHz
+  71          //      SCON = 0x50;  // Serial mode 1, 8-data bit, 1 stop bit, REN enabled
+  72          //      TR1 = 1;      // Start Timer1
+  73          
+  74          //      while (1) {  // Infinite loop to continuously send the message
+  75          //          for(u = 0; Mystring[u] != '\0'; u++) {
+  76          //              SBUF = Mystring[u];  // Load character into Serial Buffer
+  77          //              while(TI == 0);      // Wait until transmission is complete
+  78          //              TI = 0;              // Clear the Transmit Interrupt flag
+  79          //          }
+  80          //          delay(1000);  // Delay between sending the entire string
+  81          //      }
+  82          //  }
+  83          
+  84          
+  85          
+  86          
+  87          //--------------------------------------------------------------------------------------------------------
+             -------------------------------------------------
+  88          
+  89          
+  90          /*3rd Method*/
+  91          
+  92          #include <reg51.h>
+  93          
+  94          void serial_init() {
+  95   1          TMOD = 0x20;  // Timer1 in Mode 2: 8-bit auto-reload mode
+  96   1          TH1 = 0xFD;   // Load value for 9600 baud rate (assuming 11.0592 MHz clock)
+  97   1          SCON = 0x50;  // Serial mode 1, 8-data bit, 1 stop bit, receive enabled
+  98   1          TR1 = 1;      // Start Timer1
+  99   1      }
+ 100          
+ 101          void serial_write(char c) {
+ 102   1          SBUF = c;     // Load the data into the serial buffer
+ 103   1          while (TI==0);  // Wait until the transmission is complete
+ 104   1          TI = 0;       // Clear the TI flag
+ 105   1      }
+ 106          
+ 107          void serial_write_string(char* str) {
+ 108   1          while (*str) {
+ 109   2              serial_write(*str++);  // Send characters one by one
+ 110   2          }
+ 111   1      }
+ 112          
+C51 COMPILER V9.60.7.0   TASK_15_2                                                         09/23/2024 10:30:45 PAGE 3   
+
+ 113          void main() {
+ 114   1        int i;
+ 115   1          serial_init();             // Initialize serial communication
+ 116   1          while (1) {
+ 117   2              serial_write_string("Hello world This is Abdullah Zunorain\n\r");  // Send the message
+ 118   2              for (i = 0; i < 30000; i++);  // Simple delay to avoid flooding the terminal
+ 119   2          }
+ 120   1      }
+ 121          
+ 122          
+ 123          
+ 124          
+ 125          // -------------------------------------------------------------------------------------------------------
+             -----------------------------------------------------------
+ 126          
+ 127          
+ 128          
+ 129          
+ 130          
+ 131          /*
+ 132           Function of the Code:
+ 133                The code initializes the 8051 microcontroller's UART for serial communication and continuously sends th
+             -e string "Embetronicx " over the serial port with a delay between each transmission. 
+ 134                The delay is created by a simple busy-wait loop.
+ 135                
+ 136            
+ 137              The provided code snippet sends data from the microcontroller to the PC (or any device connected to the 
+             -microcontroller's serial port). Here’s how it works:
+ 138          - The `send` function transmits the string "Embetronicx  " from the microcontroller through its serial por
+             -t.
+ 139          - The microcontroller’s serial port is configured using the `SCON` register, and the baud rate is set usin
+             -g Timer 1.
+ 140          - Each character in the string is placed in the `SBUF` register (Serial Buffer), which is then sent out vi
+             -a the serial port.
+ 141          - The PC or any receiving device connected to the microcontroller’s serial port would receive this data.
+ 142          
+ 143          In summary, the direction of data flow in this code is from the `microcontroller to the PC`.  
+ 144                
+ 145          */
+ 146          
+ 147          
+ 148          //    #include<reg51.h>
+ 149          //    void send(unsigned char *s)
+ 150          //    {
+ 151          //        while(*s) {
+ 152          //            SBUF=*s++;
+ 153          //            while(TI==0);
+ 154          //            TI=0;
+ 155          //        }
+ 156          //    }
+ 157          
+ 158          //    void main()
+ 159          //    {
+ 160          //        unsigned int i;
+ 161          //        SCON=0x50;
+ 162          //        TMOD=0x20;
+ 163          //        TH1=TL1=0xfd;
+ 164          //        TR1=1;
+ 165          //        while(1) {
+ 166          //            send("Embetronicx ");
+ 167          //            for(i=0; i<=35000; i++);
+ 168          //        }
+C51 COMPILER V9.60.7.0   TASK_15_2                                                         09/23/2024 10:30:45 PAGE 4   
+
+ 169          //    }
+ 170          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =     40    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

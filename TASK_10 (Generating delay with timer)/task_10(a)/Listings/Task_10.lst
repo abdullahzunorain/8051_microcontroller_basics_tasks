@@ -1,0 +1,59 @@
+C51 COMPILER V9.60.7.0   TASK_10                                                           09/20/2024 12:39:51 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_10
+OBJECT MODULE PLACED IN .\Objects\Task_10.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Task_10.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\T
+                    -ask_10.lst) TABS(2) OBJECT(.\Objects\Task_10.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          sbit led1 = P2^0;   // defining a bit(led)
+   3          sbit led2 = P2^1;
+   4          sbit led3 = P2^2;
+   5          
+   6          void timer0_isr() interrupt 1 {
+   7   1        unsigned int x, y, z;   // declaring a variable  ( unsigned int datatypes starts from `0`)
+   8   1        x++;
+   9   1        y++;
+  10   1        z++;
+  11   1        if(x==160){
+  12   2          led1 = ~led1;
+  13   2          x=0;
+  14   2        }
+  15   1        if(y==1600){
+  16   2          led2 = ~led2;
+  17   2          y=0;
+  18   2        }
+  19   1        if(z==16000){
+  20   2          led3 = ~led3;
+  21   2          z=0;
+  22   2        }
+  23   1      }
+  24                     
+  25          void main() {
+  26   1        EA = 1;    // Global Enable (Enable All)
+  27   1        ET0 = 1;   // enable Interrupt timer 0
+  28   1        TMOD = 0x02; // timer_0 , mode_2 -> (8-bit_auto_reload timer)
+  29   1        TH0 = 0xC6;  // define a value
+  30   1        TR0 = 1;   // Start timer_0
+  31   1      
+  32   1          while (1) {
+  33   2              // Your main code here (if any)
+  34   2          }
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     97    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

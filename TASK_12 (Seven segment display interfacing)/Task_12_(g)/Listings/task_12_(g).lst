@@ -1,0 +1,433 @@
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:04:38 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_12__G_
+OBJECT MODULE PLACED IN .\Objects\task_12_(g).obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_12_(g).c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\task_12_(g).lst) TABS(2) OBJECT(.\Objects\task_12_(g).obj)
+
+line level    source
+
+   1          /*
+   2          Task_12(Part_6):
+   3          Write a lookup table to show numbers from 0-9 on the displays. 
+   4          */
+   5          
+   6          
+   7          
+   8          
+   9          
+  10          ///*__ A practice to do the task __*/
+  11          //#include <reg52.h>
+  12          
+  13          //// declaring pins for 74HC138-decoder/demultiplexer IC (used for blinking specific `7-segment` display s
+             -eperately)
+  14          //sbit pin1 = P2^2;
+  15          //sbit pin2 = P2^3;
+  16          //sbit pin3 = P2^4;
+  17          
+  18          //#define Port_0 P0
+  19          
+  20          ////sbit a = P0^0;
+  21          ////sbit b = P0^1;
+  22          ////sbit c = P0^2;
+  23          ////sbit d = P0^3;
+  24          ////sbit e = P0^4;
+  25          ////sbit f = P0^5;
+  26          ////sbit g = P0^6;
+  27          ////sbit h = P0^7;
+  28          
+  29          //void M0T0delay(void){
+  30          //  unsigned int x;
+  31          //  for(x=0; x<10; x++){
+  32          //    TMOD = 0x01;    // 16-bit non-autoreload mode, timer_0, mode_1
+  33          //    TL0 = 0x00; 
+  34          //    TH0 = 0x00;
+  35          //    TR0 = 1;
+  36          //    while(TF0==0);
+  37          //    TR0 = 0;
+  38          //    TF0 = 0;
+  39          //  }
+  40          //}
+  41          
+  42          //void main(){
+  43          //  
+  44          //  while(1){
+  45          //    pin1 = 0;
+  46          //    pin2 = 0;
+  47          //    pin3 = 0;
+  48          //    Port_0 = 0x3F;
+  49          //    M0T0delay();
+  50          //    
+  51          //    pin1 = 1;
+  52          //    pin2 = 0;
+  53          //    pin3 = 0;
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:04:38 PAGE 2   
+
+  54          //    Port_0 = 0x06;
+  55          //    M0T0delay();
+  56          //    
+  57          //    pin1 = 0;
+  58          //    pin2 = 1;
+  59          //    pin3 = 0;
+  60          //    Port_0 = 0x5B;
+  61          //    M0T0delay();
+  62          //    
+  63          //    pin1 = 1;
+  64          //    pin2 = 1;
+  65          //    pin3 = 0;
+  66          //    Port_0 = 0x4F;
+  67          //    M0T0delay();
+  68          //    
+  69          //    pin1 = 0;
+  70          //    pin2 = 0;
+  71          //    pin3 = 1;
+  72          //    Port_0 = 0x66;
+  73          //    M0T0delay();
+  74          //    
+  75          //    pin1 = 1;
+  76          //    pin2 = 0;
+  77          //    pin3 = 1;
+  78          //    Port_0 = 0x6D;
+  79          //    M0T0delay();
+  80          //    
+  81          //    pin1 = 0;
+  82          //    pin2 = 1;
+  83          //    pin3 = 1;
+  84          //    Port_0 = 0x7D;
+  85          //    M0T0delay();
+  86          //    
+  87          //    pin1 = 1;
+  88          //    pin2 = 1;
+  89          //    pin3 = 1;
+  90          //    Port_0 = 0x07;
+  91          //    M0T0delay();
+  92          //    
+  93          //    pin1 = 1;
+  94          //    pin2 = 1;
+  95          //    pin3 = 1;
+  96          //    Port_0 = 0x7F;
+  97          //    M0T0delay();
+  98          //    
+  99          //    pin1 = 1;
+ 100          //    pin2 = 1;
+ 101          //    pin3 = 1;
+ 102          //    Port_0 = 0x6F;
+ 103          //    M0T0delay();
+ 104          //    
+ 105          //    pin1 = 1;
+ 106          //    pin2 = 1;
+ 107          //    pin3 = 1;
+ 108          //    Port_0 = 0x77;
+ 109          //    M0T0delay();
+ 110          //    
+ 111          //    pin1 = 1;
+ 112          //    pin2 = 1;
+ 113          //    pin3 = 1;
+ 114          //    Port_0 = 0x7C;
+ 115          //    M0T0delay();
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:04:38 PAGE 3   
+
+ 116          //    
+ 117          //    pin1 = 1;
+ 118          //    pin2 = 1;
+ 119          //    pin3 = 1;
+ 120          //    Port_0 = 0x39;
+ 121          //    M0T0delay();
+ 122          //    
+ 123          //    pin1 = 1;
+ 124          //    pin2 = 1;
+ 125          //    pin3 = 1;
+ 126          //    Port_0 = 0x5E;
+ 127          //    M0T0delay();
+ 128          //    
+ 129          //    pin1 = 1;
+ 130          //    pin2 = 1;
+ 131          //    pin3 = 1;
+ 132          //    Port_0 = 0x79;
+ 133          //    M0T0delay();
+ 134          //    
+ 135          //    pin1 = 1;
+ 136          //    pin2 = 1;
+ 137          //    pin3 = 1;
+ 138          //    Port_0 = 0x71;
+ 139          //    M0T0delay();
+ 140          //  }
+ 141          //}
+ 142          
+ 143          
+ 144          
+ 145          
+ 146          
+ 147          
+ 148          /*--------------------------------------------------------------------------------------------------------
+             ------------------------------------------------------*/
+ 149          
+ 150          ///*..1st Approch to task..*/
+ 151          //#include <reg52.h>
+ 152          
+ 153          //sbit pin1 = P2^2;
+ 154          //sbit pin2 = P2^3;
+ 155          //sbit pin3 = P2^4;
+ 156          
+ 157          //#define Port_0 P0
+ 158          
+ 159          //void M0T0delay(void){
+ 160          //  
+ 161          //    TMOD = 0x01;  // 16-bit non-autoreload mode, timer_0, mode_1
+ 162          //    TL0 = 0xFE; 
+ 163          //    TH0 = 0xFA;
+ 164          //    TR0 = 1;
+ 165          //    while(TF0==0);
+ 166          //    TR0 = 0;
+ 167          //    TF0 = 0;
+ 168          //}
+ 169          
+ 170          //void main(){
+ 171          //  while(1){
+ 172          //    pin1 = 0;
+ 173          //    pin2 = 0;
+ 174          //    pin3 = 0;
+ 175          //    Port_0 = 0x06;
+ 176          //    M0T0delay();
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:04:38 PAGE 4   
+
+ 177          //    
+ 178          //    pin1 = 1;
+ 179          //    pin2 = 0;
+ 180          //    pin3 = 0;
+ 181          //    Port_0 = 0x5B;
+ 182          //    M0T0delay();
+ 183          //    
+ 184          //    pin1 = 0;
+ 185          //    pin2 = 1;
+ 186          //    pin3 = 0;
+ 187          //    Port_0 = 0x4F;
+ 188          //    M0T0delay();
+ 189          //    
+ 190          //    pin1 = 1;
+ 191          //    pin2 = 1;
+ 192          //    pin3 = 0;
+ 193          //    Port_0 = 0x66;
+ 194          //    M0T0delay();
+ 195          //    
+ 196          //    pin1 = 0;
+ 197          //    pin2 = 0;
+ 198          //    pin3 = 1;
+ 199          //    Port_0 = 0x6D;
+ 200          //    M0T0delay();
+ 201          //    
+ 202          //    pin1 = 1;
+ 203          //    pin2 = 0;
+ 204          //    pin3 = 1;
+ 205          //    Port_0 = 0x7D;
+ 206          //    M0T0delay();
+ 207          //    
+ 208          //    pin1 = 0;
+ 209          //    pin2 = 1;
+ 210          //    pin3 = 1;
+ 211          //    Port_0 = 0x07;
+ 212          //    M0T0delay();
+ 213          //    
+ 214          //    pin1 = 1;
+ 215          //    pin2 = 1;
+ 216          //    pin3 = 1;
+ 217          //    Port_0 = 0x7F;
+ 218          //    M0T0delay();
+ 219          //    
+ 220          //    pin1 = 1;
+ 221          //    pin2 = 1;
+ 222          //    pin3 = 1;
+ 223          //    Port_0 = 0x6F;
+ 224          //    M0T0delay();
+ 225          //  }
+ 226          //}
+ 227          
+ 228          
+ 229          
+ 230          
+ 231          
+ 232          
+ 233          
+ 234          
+ 235          //--------------------------------------------------------------------------------------------------------
+             -------------------------------------------------------------------------------------------
+ 236          
+ 237          /*..2nd Approach to task..*/
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:04:38 PAGE 5   
+
+ 238          #include <reg52.h>
+ 239          
+ 240          sbit pin1 = P2^2;
+ 241          sbit pin2 = P2^3;
+ 242          sbit pin3 = P2^4;
+ 243          
+ 244          #define Port_0 P0
+ 245          
+ 246          
+ 247          void display_zero_to_F();
+ 248          
+ 249          void M0T0delay(void){
+ 250   1        
+ 251   1          TMOD = 0x01;  // 16-bit non-autoreload mode, timer_0, mode_1
+ 252   1          TL0 = 0x00; 
+ 253   1          TH0 = 0x00;
+ 254   1          TR0 = 1;
+ 255   1          while(TF0==0);
+ 256   1          TR0 = 0;
+ 257   1          TF0 = 0;
+ 258   1      }
+ 259          
+ 260          
+ 261          void main(){
+ 262   1        while(1){
+ 263   2          
+ 264   2          pin1 = 0;
+ 265   2          pin2 = 0;
+ 266   2          pin3 = 0;
+ 267   2          
+ 268   2          display_zero_to_F();
+ 269   2          M0T0delay();
+ 270   2          
+ 271   2          pin1 = 1;
+ 272   2          pin2 = 0;
+ 273   2          pin3 = 0;
+ 274   2          
+ 275   2          display_zero_to_F();
+ 276   2          M0T0delay();
+ 277   2          
+ 278   2          
+ 279   2          pin1 = 0;
+ 280   2          pin2 = 1;
+ 281   2          pin3 = 0;
+ 282   2        
+ 283   2          display_zero_to_F();
+ 284   2          M0T0delay();
+ 285   2          
+ 286   2          pin1 = 1;
+ 287   2          pin2 = 1;
+ 288   2          pin3 = 0;
+ 289   2      
+ 290   2          display_zero_to_F();
+ 291   2          M0T0delay();
+ 292   2          
+ 293   2          pin1 = 0;
+ 294   2          pin2 = 0;
+ 295   2          pin3 = 1;
+ 296   2        
+ 297   2          display_zero_to_F();
+ 298   2          M0T0delay();
+ 299   2      
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:04:38 PAGE 6   
+
+ 300   2          pin1 = 1;
+ 301   2          pin2 = 0;
+ 302   2          pin3 = 1;
+ 303   2      
+ 304   2          display_zero_to_F();
+ 305   2          M0T0delay();
+ 306   2          
+ 307   2          pin1 = 0;
+ 308   2          pin2 = 1;
+ 309   2          pin3 = 1;
+ 310   2        
+ 311   2          display_zero_to_F();
+ 312   2          M0T0delay();
+ 313   2          
+ 314   2          pin1 = 1;
+ 315   2          pin2 = 1;
+ 316   2          pin3 = 1;
+ 317   2      
+ 318   2          display_zero_to_F();
+ 319   2          M0T0delay();
+ 320   2          
+ 321   2          pin1 = 1;
+ 322   2          pin2 = 1;
+ 323   2          pin3 = 1;
+ 324   2      
+ 325   2        }
+ 326   1      }
+ 327          
+ 328          
+ 329          void display_zero_to_F(){
+ 330   1        
+ 331   1          Port_0 = 0x3F;
+ 332   1          M0T0delay();
+ 333   1          M0T0delay();
+ 334   1        
+ 335   1          Port_0 = 0x06;
+ 336   1          M0T0delay();
+ 337   1          M0T0delay();
+ 338   1      
+ 339   1      
+ 340   1          Port_0 = 0x5B;
+ 341   1          M0T0delay();
+ 342   1          M0T0delay();
+ 343   1      
+ 344   1          Port_0 = 0x4F;
+ 345   1          M0T0delay();
+ 346   1          M0T0delay();    
+ 347   1      
+ 348   1          Port_0 = 0x66;
+ 349   1          M0T0delay();
+ 350   1          M0T0delay();
+ 351   1      
+ 352   1          Port_0 = 0x6D;
+ 353   1          M0T0delay();
+ 354   1          M0T0delay();
+ 355   1      
+ 356   1          Port_0 = 0x7D;
+ 357   1          M0T0delay();
+ 358   1          M0T0delay();
+ 359   1      
+ 360   1          Port_0 = 0x07;
+ 361   1          M0T0delay();
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:04:38 PAGE 7   
+
+ 362   1          M0T0delay();
+ 363   1      
+ 364   1          Port_0 = 0x7F;
+ 365   1          M0T0delay();
+ 366   1          M0T0delay();
+ 367   1      
+ 368   1          Port_0 = 0x6F;
+ 369   1          M0T0delay();
+ 370   1          M0T0delay();
+ 371   1          
+ 372   1          
+ 373   1          Port_0 = 0x77;
+ 374   1          M0T0delay();
+ 375   1          M0T0delay();
+ 376   1          
+ 377   1          
+ 378   1          Port_0 = 0x7C;
+ 379   1          M0T0delay();
+ 380   1          M0T0delay();
+ 381   1          
+ 382   1          
+ 383   1          Port_0 = 0x39; 
+ 384   1          M0T0delay();
+ 385   1          M0T0delay();
+ 386   1          
+ 387   1          Port_0 = 0x5E;
+ 388   1          M0T0delay();
+ 389   1          M0T0delay();
+ 390   1          
+ 391   1          Port_0 = 0x79;
+ 392   1          M0T0delay();
+ 393   1          M0T0delay();
+ 394   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    254    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

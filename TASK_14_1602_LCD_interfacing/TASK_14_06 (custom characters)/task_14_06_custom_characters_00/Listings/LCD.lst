@@ -1,0 +1,186 @@
+C51 COMPILER V9.60.7.0   LCD                                                               09/23/2024 10:18:47 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN .\Objects\LCD.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LCD.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\LCD.l
+                    -st) TABS(2) OBJECT(.\Objects\LCD.obj)
+
+line level    source
+
+   1          //CUSTUM CHARACTOR
+   2          
+   3          #include <reg51.h>
+   4          #include "LCD.h"
+   5          
+   6          void lcd_init()
+   7          {
+   8   1          cmd(0x38);
+   9   1          cmd(0x0c);
+  10   1          cmd(0x06);
+  11   1          cmd(0x01);
+  12   1          cmd(0x80);
+  13   1      }
+  14          
+  15          void cmd(unsigned char a)
+  16          {
+  17   1          lcd_data=a;
+  18   1          rs=0;
+  19   1          rw=0;
+  20   1          en=1;
+  21   1          lcd_delay();
+  22   1          en=0;
+  23   1      }
+  24          
+  25          void dat(unsigned char b)
+  26          {
+  27   1          lcd_data=b;
+  28   1          rs=1;
+  29   1          rw=0;
+  30   1          en=1;
+  31   1          lcd_delay();
+  32   1          en=0;
+  33   1      }
+  34          
+  35          void show(unsigned char *s)
+  36          {
+  37   1          while(*s)
+  38   1            {
+  39   2              dat(*s++);
+  40   2          }
+  41   1      }
+  42          
+  43          void lcd_delay()
+  44          {
+  45   1          unsigned int lcd_delay;
+  46   1          for(lcd_delay=0;lcd_delay<=6000;lcd_delay++);
+  47   1      }
+  48          
+  49          
+  50          void store()
+  51          {
+  52   1          cmd(64);  //First location
+  53   1          dat(0);
+  54   1          dat(10);
+C51 COMPILER V9.60.7.0   LCD                                                               09/23/2024 10:18:47 PAGE 2   
+
+  55   1          dat(21);
+  56   1          dat(17);
+  57   1          dat(10);
+  58   1          dat(4);
+  59   1          dat(0);
+  60   1          dat(0);
+  61   1          cmd(0xc0); //location for character
+  62   1          dat(0);     //display character created at 0x64 adddress
+  63   1          lcd_delay();
+  64   1        
+  65   1          cmd(72);    //Second location
+  66   1          dat(4);
+  67   1          dat(14);
+  68   1          dat(14);
+  69   1          dat(14);
+  70   1          dat(31);
+  71   1          dat(0);
+  72   1          dat(4);
+  73   1          dat(0);
+  74   1          cmd(0xc2);
+  75   1          dat(1);
+  76   1          lcd_delay();
+  77   1      
+  78   1          cmd(80);            //Third location
+  79   1          dat(31);
+  80   1          dat(21);
+  81   1          dat(31);
+  82   1          dat(31);
+  83   1          dat(14);
+  84   1          dat(10);
+  85   1          dat(27);
+  86   1          dat(0);
+  87   1          cmd(0xc4);
+  88   1          dat(2);
+  89   1          lcd_delay();
+  90   1          
+  91   1          
+  92   1          
+  93   1          cmd(88);            //4TH location
+  94   1          dat(0);
+  95   1          dat(1);
+  96   1          dat(3);
+  97   1          dat(22);
+  98   1          dat(28);
+  99   1          dat(8);
+ 100   1          dat(0);
+ 101   1          dat(0);
+ 102   1          cmd(0xc6);
+ 103   1          dat(3);
+ 104   1          lcd_delay();
+ 105   1          
+ 106   1          cmd(96);            //5TH location
+ 107   1          dat(1);
+ 108   1          dat(3);
+ 109   1          dat(15);
+ 110   1          dat(15);
+ 111   1          dat(15);
+ 112   1          dat(3);
+ 113   1          dat(1);
+ 114   1          dat(0);
+ 115   1          cmd(0xc8);
+ 116   1          dat(4);
+C51 COMPILER V9.60.7.0   LCD                                                               09/23/2024 10:18:47 PAGE 3   
+
+ 117   1          lcd_delay();
+ 118   1          
+ 119   1          
+ 120   1          cmd(104);            //6TH location
+ 121   1          dat(1);
+ 122   1          dat(3);
+ 123   1          dat(5);
+ 124   1          dat(9);
+ 125   1          dat(9);
+ 126   1          dat(11);
+ 127   1          dat(27);
+ 128   1          dat(24);
+ 129   1          cmd(0xca);
+ 130   1          dat(5);
+ 131   1          lcd_delay();
+ 132   1          
+ 133   1          cmd(112);            //7TH location
+ 134   1          dat(0);
+ 135   1          dat(14);
+ 136   1          dat(21);
+ 137   1          dat(27);
+ 138   1          dat(14);
+ 139   1          dat(14);
+ 140   1          dat(0);
+ 141   1          dat(0);
+ 142   1          cmd(0xcc);
+ 143   1          dat(6);
+ 144   1          lcd_delay();
+ 145   1          
+ 146   1          cmd(120);            //8TH location
+ 147   1          dat(14);
+ 148   1          dat(17);
+ 149   1          dat(17);
+ 150   1          dat(31);
+ 151   1          dat(27);
+ 152   1          dat(27);
+ 153   1          dat(31);
+ 154   1          dat(0);
+ 155   1          cmd(0xce);
+ 156   1          dat(7);
+ 157   1          lcd_delay();  
+ 158   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    569    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

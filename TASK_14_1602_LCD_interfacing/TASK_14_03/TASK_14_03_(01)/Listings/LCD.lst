@@ -1,0 +1,295 @@
+C51 COMPILER V9.60.7.0   LCD                                                               09/20/2024 16:38:58 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN .\Objects\LCD.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LCD.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\LCD.l
+                    -st) TABS(2) OBJECT(.\Objects\LCD.obj)
+
+line level    source
+
+   1          
+   2          
+   3          #include "LCD.h"
+   4          
+   5          // Delay function to create a short delay
+   6          void delay() {
+   7   1          int i, j;
+   8   1          for(i = 0; i < 100; i++) {
+   9   2              for (j = 0; j < 100; j++);
+  10   2          }
+  11   1      }
+  12          
+  13          
+  14          // Define lcd_delay function to create a delay for LCD timing
+  15          void lcd_delay() {
+  16   1          delay();
+  17   1      }
+  18          
+  19          
+  20          // Function to send a command to the LCD
+  21          void lcd_cmd(unsigned char a) {
+  22   1          text = a;    // Put the command on the data port
+  23   1          rs = 0;      // Select command register (RS=0)
+  24   1          rw = 0;      // Select write operation (RW=0)
+  25   1          en = 1;      // Generate a high-to-low pulse on the enable pin
+  26   1          lcd_delay(); // Wait for the command to be processed
+  27   1          en = 0;      // End the enable pulse
+  28   1      }
+  29          
+  30          
+  31          // Function to send data to the LCD
+  32          void lcd_data(unsigned char b) {
+  33   1          text = b;    // Put the data on the data port
+  34   1          rs = 1;      // Select data register (RS=1)
+  35   1          rw = 0;      // Select write operation (RW=0)
+  36   1          en = 1;      // Generate a high-to-low pulse on the enable pin
+  37   1          lcd_delay(); // Wait for the data to be processed
+  38   1          en = 0;      // End the enable pulse
+  39   1      }
+  40          
+  41          
+  42          // Function to initialize the LCD
+  43          void lcd_init() {
+  44   1          lcd_cmd(0x01); // Clear the display
+  45   1          delay();       // Wait for the command to be processed
+  46   1          lcd_cmd(0x38); // Set LCD to 8-bit mode, 2 lines, 5x7 matrix
+  47   1          delay();       // Wait for the command to be processed
+  48   1          lcd_cmd(0x0E); // Display ON, cursor ON
+  49   1          delay();       // Wait for the command to be processed
+  50   1          lcd_cmd(0x10); // Shift cursor position to the left
+  51   1          delay();       // Wait for the command to be processed
+  52   1          lcd_cmd(0x80); // Set cursor position to the beginning of the first line
+  53   1          delay();       // Wait for the command to be processed
+  54   1      }
+C51 COMPILER V9.60.7.0   LCD                                                               09/20/2024 16:38:58 PAGE 2   
+
+  55          
+  56          
+  57          
+  58          
+  59          
+  60          
+  61          
+  62          
+  63          
+  64          
+  65          
+  66          
+  67          
+  68          
+  69          
+  70          
+  71          
+  72          
+  73          
+  74          
+  75          
+  76          
+  77          
+  78          
+  79          
+  80          
+  81          
+  82          /* _______________________________________________________________________________________________________
+             -_______________________________________________________________________
+  83          Sure! Let's go through this code step by step and explain each part in simple terms. This code is for cont
+             -rolling an LCD display using an 8051 microcontroller.
+  84          
+  85          ### Include Header and Define Pins
+  86          
+  87          ```c
+  88          #include <reg51.h>  // Include the header file for 8051 microcontroller registers and definitions
+  89          ```
+  90          This line includes a header file which contains the definitions for working with the 8051 microcontroller.
+  91          
+  92          ```c
+  93          sbit rs = P2^6;    // Define the register select pin as bit 6 of port 2
+  94          sbit rw = P2^5;    // Define the read/write pin as bit 5 of port 2
+  95          sbit en = P2^7;    // Define the enable pin as bit 7 of port 2
+  96          ```
+  97          Here, three special bits (sbit) are defined to control the LCD:
+  98          - `rs` (Register Select) on bit 6 of port 2.
+  99          - `rw` (Read/Write) on bit 5 of port 2.
+ 100          - `en` (Enable) on bit 7 of port 2.
+ 101          
+ 102          These pins help control the LCD by telling it whether we want to send a command, write data, or enable it.
+ 103          
+ 104          ```c
+ 105          #define text P0    // Define the data port for the LCD as port 0
+ 106          ```
+ 107          This line defines the entire port 0 (P0) as the data port for sending commands and data to the LCD.
+ 108          
+ 109          ### Delay Functions
+ 110          
+ 111          ```c
+ 112          void delay() {
+ 113              int i, j;
+ 114              for(i = 0; i < 100; i++) {
+C51 COMPILER V9.60.7.0   LCD                                                               09/20/2024 16:38:58 PAGE 3   
+
+ 115                  for (j = 0; j < 100; j++);
+ 116              }
+ 117          }
+ 118          ```
+ 119          This function creates a small delay. It uses two nested loops to waste time, making sure that operations o
+             -n the LCD have time to complete.
+ 120          
+ 121          ```c
+ 122          void lcd_delay() {
+ 123              delay();
+ 124          }
+ 125          ```
+ 126          This function is just a wrapper around the delay function, specifically named to indicate it's for LCD tim
+             -ing.
+ 127          
+ 128          ### Sending Commands to the LCD
+ 129          
+ 130          ```c
+ 131          void lcd_cmd(unsigned char a) {
+ 132              text = a;    // Put the command on the data port
+ 133              rs = 0;      // Select command register (RS=0)
+ 134              rw = 0;      // Select write operation (RW=0)
+ 135              en = 1;      // Generate a high-to-low pulse on the enable pin
+ 136              lcd_delay(); // Wait for the command to be processed
+ 137              en = 0;      // End the enable pulse
+ 138          }
+ 139          ```
+ 140          This function sends a command to the LCD:
+ 141          - `text = a;` puts the command data on port 0.
+ 142          - `rs = 0;` sets the LCD to command mode.
+ 143          - `rw = 0;` sets the LCD to write mode.
+ 144          - `en = 1;` sends an enable signal.
+ 145          - `lcd_delay();` waits for the command to be processed.
+ 146          - `en = 0;` turns off the enable signal.
+ 147          
+ 148          ### Sending Data to the LCD
+ 149          
+ 150          ```c
+ 151          void lcd_data(unsigned char b) {
+ 152              text = b;    // Put the data on the data port
+ 153              rs = 1;      // Select data register (RS=1)
+ 154              rw = 0;      // Select write operation (RW=0)
+ 155              en = 1;      // Generate a high-to-low pulse on the enable pin
+ 156              lcd_delay(); // Wait for the data to be processed
+ 157              en = 0;      // End the enable pulse
+ 158          }
+ 159          ```
+ 160          This function sends data (characters) to the LCD:
+ 161          - `text = b;` puts the data on port 0.
+ 162          - `rs = 1;` sets the LCD to data mode.
+ 163          - `rw = 0;` sets the LCD to write mode.
+ 164          - `en = 1;` sends an enable signal.
+ 165          - `lcd_delay();` waits for the data to be processed.
+ 166          - `en = 0;` turns off the enable signal.
+ 167          
+ 168          ### Initializing the LCD
+ 169          
+ 170          ```c
+ 171          void lcd_init() {
+ 172              lcd_cmd(0x01); // Clear the display
+ 173              delay();       // Wait for the command to be processed
+ 174              lcd_cmd(0x38); // Set LCD to 8-bit mode, 2 lines, 5x7 matrix
+C51 COMPILER V9.60.7.0   LCD                                                               09/20/2024 16:38:58 PAGE 4   
+
+ 175              delay();       // Wait for the command to be processed
+ 176              lcd_cmd(0x0E); // Display ON, cursor ON
+ 177              delay();       // Wait for the command to be processed
+ 178              lcd_cmd(0x10); // Shift cursor position to the left
+ 179              delay();       // Wait for the command to be processed
+ 180              lcd_cmd(0x80); // Set cursor position to the beginning of the first line
+ 181              delay();       // Wait for the command to be processed
+ 182          }
+ 183          ```
+ 184          This function initializes the LCD:
+ 185          - `lcd_cmd(0x01);` clears the display.
+ 186          - `lcd_cmd(0x38);` sets the LCD to 8-bit mode, with 2 lines and a 5x7 matrix for characters.
+ 187          - `lcd_cmd(0x0E);` turns on the display and the cursor.
+ 188          - `lcd_cmd(0x10);` shifts the cursor to the left.
+ 189          - `lcd_cmd(0x80);` sets the cursor to the beginning of the first line.
+ 190          
+ 191          ### Main Function
+ 192          
+ 193          ```c
+ 194          int main() {
+ 195              text = 0x00;   // Clear the data port
+ 196              lcd_init();    // Initialize the LCD
+ 197              
+ 198              // Write 'Z' to the LCD
+ 199              lcd_data('Z');
+ 200              delay();       // Wait for the data to be processed
+ 201          
+ 202              // Write 'U' to the LCD
+ 203              lcd_data('U');
+ 204              delay();       // Wait for the data to be processed
+ 205          
+ 206              // Write 'L' to the LCD
+ 207              lcd_data('L');
+ 208              delay();       // Wait for the data to be processed    
+ 209              
+ 210              // Write 'Q' to the LCD
+ 211              lcd_data('Q');
+ 212              delay();       // Wait for the data to be processed
+ 213          
+ 214              // Write 'A' to the LCD
+ 215              lcd_data('A');
+ 216              delay();       // Wait for the data to be processed   
+ 217          
+ 218              // Write 'R' to the LCD
+ 219              lcd_data('R');
+ 220              delay();       // Wait for the data to be processed
+ 221              
+ 222              // Write 'N' to the LCD
+ 223              lcd_data('N');
+ 224              delay();       // Wait for the data to be processed    
+ 225          
+ 226              // Write 'A' to the LCD
+ 227              lcd_data('A');
+ 228              delay();       // Wait for the data to be processed    
+ 229              
+ 230              // Write 'I' to the LCD
+ 231              lcd_data('I');
+ 232              delay();       // Wait for the data to be processed    
+ 233              
+ 234              // Write 'N' to the LCD
+ 235              lcd_data('N');
+ 236              delay();       // Wait for the data to be processed    
+C51 COMPILER V9.60.7.0   LCD                                                               09/20/2024 16:38:58 PAGE 5   
+
+ 237          
+ 238              // Return 0 to indicate successful execution
+ 239              return 0;        
+ 240          }
+ 241          ```
+ 242          The `main` function does the following:
+ 243          - `text = 0x00;` clears the data port.
+ 244          - `lcd_init();` initializes the LCD.
+ 245          - Then it writes the characters 'Z', 'U', 'L', 'Q', 'A', 'R', 'N', 'A', 'I', and 'N' one by one to the LCD
+             -. After each character, it waits for the data to be processed.
+ 246          
+ 247          ### Summary
+ 248          - **Include necessary headers and define control pins.**
+ 249          - **Create delay functions to allow time for LCD operations.**
+ 250          - **Functions to send commands and data to the LCD.**
+ 251          - **Initialize the LCD to prepare it for displaying characters.**
+ 252          - **In the main function, clear the data port, initialize the LCD, and display the word "ZULQARNAIN" on th
+             -e LCD.**
+ 253          
+ 254          This step-by-step process ensures that the LCD is correctly set up and displays the intended characters.
+ 255          __________________________________________________________________________________________________________
+             -____________________________________________________________________
+ 256          */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     97    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

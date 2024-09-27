@@ -1,0 +1,4 @@
+".\Objects\task_14_6.obj",
+".\Objects\LCD.obj" 
+TO ".\Objects\task_14_6" 
+PRINT(".\Listings\task_14_6.m51") RAMSIZE(256) 

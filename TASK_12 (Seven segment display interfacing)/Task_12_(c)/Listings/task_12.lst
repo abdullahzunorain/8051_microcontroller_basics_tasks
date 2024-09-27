@@ -1,0 +1,381 @@
+C51 COMPILER V9.60.7.0   TASK_12                                                           09/20/2024 14:35:29 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_12
+OBJECT MODULE PLACED IN .\Objects\task_12.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_12.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\t
+                    -ask_12.lst) TABS(2) OBJECT(.\Objects\task_12.obj)
+
+line level    source
+
+   1          /*
+   2          task_12: (3). Write a program to select LED1 to LED8 with a delay of 500 ms (use timer delay), the final 
+   3                      result of the program will be that 7 segment displays will turn ON one by one from first to 
+   4                      eighth display.  
+   5          */
+   6          
+   7          
+   8          
+   9          
+  10          /*...Practice (for understanding the mechanism)...*///----------------------------------------------------
+             --------------------------------------------------------------------------------------------------
+  11          
+  12          //////#include <reg52.h>
+  13          ///////////////////////////////
+  14          //////sbit pin1 = P2^2;   /////  these pins are used for Activation of any 7-segment display of LED.
+  15          //////sbit pin2 = P2^3;   /////       //
+  16          //////sbit pin3 = P2^4;   /////       //
+  17          ///////////////////////////////
+  18          
+  19          ///////////////////////////////
+  20          //////#define LED P0    /////// this `Port_0` is used for any value, alphabet or whatever we want to displ
+             -ay on `7-segment display`
+  21          ///////////////////////////////
+  22          
+  23          //////sbit led0 = P2^0; 
+  24          
+  25          //////void M0T0delay(unsigned int);
+  26          
+  27          //////void main(){
+  28          //////  while(1){
+  29          //////    
+  30          ////////    ///////////////////////////////////////////////////////
+  31          ////////    Here we are going to check the delay for the Seven segment display through using `PIN 2.0` -->
+             -> led0
+  32          ////////    /////// 1-th seven segment display /////////////////////
+  33          ////////        pin1 = 0;//////////////////////////////////////////
+  34          ////////        pin2 = 0;//////////////////////////////////////////
+  35          ////////        pin3 = 0;//////////////////////////////////////////
+  36          ////////        led0 = ~led0;//////////////////////////////////////
+  37          ////////        M0T0delay(500);////////////////////////////////////
+  38          ////////    ///////////////////////////////////////////////////////
+  39          //////    
+  40          //////////    2nd method to check the delay for the Seven segment display
+  41          ////////    // 2-nd seven segment display
+  42          ////////    pin1 = 1;
+  43          ////////    pin2 = 0;
+  44          ////////    pin3 = 0;
+  45          ////////    LED = ~LED;
+  46          ////////    led0 = ~led0;
+  47          ////////    M0T0delay(500);
+  48          //////    
+  49          //////    
+  50          //////    
+  51          //////    
+C51 COMPILER V9.60.7.0   TASK_12                                                           09/20/2024 14:35:29 PAGE 2   
+
+  52          ////////    
+  53          ////////    // 2
+  54          ////////    pin1 = 0;
+  55          ////////    pin2 = 1;
+  56          ////////    pin3 = 0;
+  57          ////////    M0T0delay(500);
+  58          ////////    
+  59          ////////    // 3
+  60          ////////    pin1 = 1;
+  61          ////////    pin2 = 1;
+  62          ////////    pin3 = 0;
+  63          ////////    M0T0delay(500);
+  64          ////////    
+  65          ////////    // 4
+  66          ////////    pin1 = 0;
+  67          ////////    pin2 = 0;
+  68          ////////    pin3 = 1;
+  69          ////////    M0T0delay(500);
+  70          ////////    
+  71          ////////    // 5
+  72          ////////    pin1 = 1;
+  73          ////////    pin2 = 0;
+  74          ////////    pin3 = 1;
+  75          ////////    M0T0delay(500);
+  76          ////////    
+  77          ////////    // 6
+  78          ////////    pin1 = 0;
+  79          ////////    pin2 = 1;
+  80          ////////    pin3 = 1;
+  81          ////////    M0T0delay(500);
+  82          ////////    
+  83          ////////    // 7
+  84          ////////    pin1 = 1;
+  85          ////////    pin2 = 1;
+  86          ////////    pin3 = 1;
+  87          ////////    M0T0delay(500);
+  88          //////    
+  89          //////  }
+  90          //////}
+  91          
+  92          //////void M0T0delay(unsigned int ms) {
+  93          //////    unsigned int i, j;
+  94          //////    for (i = 0; i < ms; i++)
+  95          //////        for (j = 0; j < 112; j++);
+  96          //////}
+  97          
+  98          
+  99          
+ 100          
+ 101          
+ 102          /////////*...Method_01...*///-----------------------------------------------------------------------------
+             ----------------------------------------------------------------------------------------------------
+ 103          ////////#include <reg52.h>
+ 104          ////////sbit pin1 = P2^2;
+ 105          ////////sbit pin2 = P2^3;
+ 106          ////////sbit pin3 = P2^4;
+ 107          
+ 108          ////////void M0T0delay(unsigned int);
+ 109          
+ 110          ////////void main(){
+ 111          ////////  while(1){
+ 112          ////////    
+C51 COMPILER V9.60.7.0   TASK_12                                                           09/20/2024 14:35:29 PAGE 3   
+
+ 113          ////////    // 0
+ 114          ////////    pin1 = 0;
+ 115          ////////    pin2 = 0;
+ 116          ////////    pin3 = 0;
+ 117          ////////    M0T0delay(500);
+ 118          ////////    
+ 119          ////////    // 1
+ 120          ////////    pin1 = 1;
+ 121          ////////    pin2 = 0;
+ 122          ////////    pin3 = 0;
+ 123          ////////    M0T0delay(500);
+ 124          ////////    
+ 125          ////////    // 2
+ 126          ////////    pin1 = 0;
+ 127          ////////    pin2 = 1;
+ 128          ////////    pin3 = 0;
+ 129          ////////    M0T0delay(500);
+ 130          ////////    
+ 131          ////////    // 3
+ 132          ////////    pin1 = 1;
+ 133          ////////    pin2 = 1;
+ 134          ////////    pin3 = 0;
+ 135          ////////    M0T0delay(500);
+ 136          ////////    
+ 137          ////////    // 4
+ 138          ////////    pin1 = 0;
+ 139          ////////    pin2 = 0;
+ 140          ////////    pin3 = 1;
+ 141          ////////    M0T0delay(500);
+ 142          ////////    
+ 143          ////////    // 5
+ 144          ////////    pin1 = 1;
+ 145          ////////    pin2 = 0;
+ 146          ////////    pin3 = 1;
+ 147          ////////    M0T0delay(500);
+ 148          ////////    
+ 149          ////////    // 6
+ 150          ////////    pin1 = 0;
+ 151          ////////    pin2 = 1;
+ 152          ////////    pin3 = 1;
+ 153          ////////    M0T0delay(500);
+ 154          ////////    
+ 155          ////////    // 7
+ 156          ////////    pin1 = 1;
+ 157          ////////    pin2 = 1;
+ 158          ////////    pin3 = 1;
+ 159          ////////    M0T0delay(500);
+ 160          ////////    
+ 161          ////////  }
+ 162          ////////}
+ 163          
+ 164          ////////void M0T0delay(unsigned int ms) {
+ 165          ////////    unsigned int i, j;
+ 166          ////////    for (i = 0; i < ms; i++)
+ 167          ////////        for (j = 0; j < 112; j++);
+ 168          ////////}
+ 169          
+ 170          
+ 171          
+ 172          
+ 173          
+ 174          
+C51 COMPILER V9.60.7.0   TASK_12                                                           09/20/2024 14:35:29 PAGE 4   
+
+ 175          ///*_Method_02_(using timer_0 mode_2: 8_bit auto-reload)_*///---------------------------------------------
+             -------------------------------------------------------------------------------------------------------------------------
+             -------------------
+ 176          
+ 177          ////  #include <reg52.h>
+ 178          
+ 179          ////  // declaring pins for 74HC138-decoder/demultiplexer IC (used for blinking specific `7-segment` displa
+             -y seperately)
+ 180          ////  sbit pin1 = P2^2;
+ 181          ////  sbit pin2 = P2^3;
+ 182          ////  sbit pin3 = P2^4;
+ 183          
+ 184          ////  void M0T0delay(void);  // delay function prototype
+ 185          
+ 186          ////  void main(){
+ 187          ////    
+ 188          ////    while(1){
+ 189          ////      // for each 7-segment display these pins have different values...
+ 190          ////      // 1st seven segment display
+ 191          ////      pin1 = 0;
+ 192          ////      pin2 = 0;
+ 193          ////      pin3 = 0;
+ 194          ////      M0T0delay();
+ 195          ////      
+ 196          ////      //  2nd seven segment display
+ 197          ////      pin1 = 1;
+ 198          ////      pin2 = 0;
+ 199          ////      pin3 = 0;
+ 200          ////      M0T0delay();
+ 201          ////      
+ 202          ////      //  3rd seven segment display
+ 203          ////      pin1 = 0;
+ 204          ////      pin2 = 1;
+ 205          ////      pin3 = 0;
+ 206          ////      M0T0delay();
+ 207          ////      
+ 208          ////      //  4th seven segment display
+ 209          ////      pin1 = 1;
+ 210          ////      pin2 = 1;
+ 211          ////      pin3 = 0;
+ 212          ////      M0T0delay();
+ 213          ////      
+ 214          ////      //  5th seven segment display
+ 215          ////      pin1 = 0;
+ 216          ////      pin2 = 0;
+ 217          ////      pin3 = 1;
+ 218          ////      M0T0delay();
+ 219          ////      
+ 220          ////      //  6th seven segment display
+ 221          ////      pin1 = 1;
+ 222          ////      pin2 = 0;
+ 223          ////      pin3 = 1;
+ 224          ////      M0T0delay();
+ 225          ////      
+ 226          ////      //  7th seven segment display
+ 227          ////      pin1 = 0;
+ 228          ////      pin2 = 1;
+ 229          ////      pin3 = 1;
+ 230          ////      M0T0delay();
+ 231          ////      
+ 232          ////      //  8th seven segment display
+ 233          ////      pin1 = 1;
+C51 COMPILER V9.60.7.0   TASK_12                                                           09/20/2024 14:35:29 PAGE 5   
+
+ 234          ////      pin2 = 1;
+ 235          ////      pin3 = 1;
+ 236          ////      M0T0delay();
+ 237          ////    }
+ 238          ////  }
+ 239          
+ 240          ////  /*... timer delay using 8-bit autoreload mode, timer_0, mode_2 ...*/
+ 241          ////  void M0T0delay(void){
+ 242          ////    unsigned long y;         // declaring a variable
+ 243          ////    for(y=0; y<9050; y++){  // for loop: for contineous iteration up to 100, then the timer delay will b
+             -e called.
+ 244          ////      TMOD = 0x02;          // 8-bit auto-reload mode, timer_0, mode_2
+ 245          ////      TH0 = 0x00;
+ 246          ////      TR0 = 1;
+ 247          ////    }
+ 248          ////  }
+ 249          
+ 250          
+ 251          
+ 252          
+ 253          
+ 254          
+ 255          
+ 256          /*.Method_03_(using timer_0 mode_2: 16_bit non-autoreload).*///-------------------------------------------
+             -------------------------------------------------------------------------------------------------------------------------
+             ---------------------
+ 257          
+ 258          #include <reg52.h>
+ 259          
+ 260          // declaring pins for 74HC138-decoder/demultiplexer IC (used for blinking specific `7-segment` display sep
+             -erately)
+ 261          sbit pin1 = P2^2;
+ 262          sbit pin2 = P2^3;
+ 263          sbit pin3 = P2^4;
+ 264          
+ 265          void M0T0delay(void);  // delay function prototype
+ 266          
+ 267          void main(){
+ 268   1        
+ 269   1        while(1){
+ 270   2          // for each 7-segment display these pins have different values...
+ 271   2          // 1st seven segment display
+ 272   2          pin1 = 0;
+ 273   2          pin2 = 0;
+ 274   2          pin3 = 0;
+ 275   2          M0T0delay();
+ 276   2          
+ 277   2          //  2nd seven segment display
+ 278   2          pin1 = 1;
+ 279   2          pin2 = 0;
+ 280   2          pin3 = 0;
+ 281   2          M0T0delay();
+ 282   2          
+ 283   2          //  3rd seven segment display
+ 284   2          pin1 = 0;
+ 285   2          pin2 = 1;
+ 286   2          pin3 = 0;
+ 287   2          M0T0delay();
+ 288   2          
+ 289   2          //  4th seven segment display
+ 290   2          pin1 = 1;
+ 291   2          pin2 = 1;
+C51 COMPILER V9.60.7.0   TASK_12                                                           09/20/2024 14:35:29 PAGE 6   
+
+ 292   2          pin3 = 0;
+ 293   2          M0T0delay();
+ 294   2          
+ 295   2          //  5th seven segment display
+ 296   2          pin1 = 0;
+ 297   2          pin2 = 0;
+ 298   2          pin3 = 1;
+ 299   2          M0T0delay();
+ 300   2          
+ 301   2          //  6th seven segment display
+ 302   2          pin1 = 1;
+ 303   2          pin2 = 0;
+ 304   2          pin3 = 1;
+ 305   2          M0T0delay();
+ 306   2          
+ 307   2          //  7th seven segment display
+ 308   2          pin1 = 0;
+ 309   2          pin2 = 1;
+ 310   2          pin3 = 1;
+ 311   2          M0T0delay();
+ 312   2          
+ 313   2          //  8th seven segment display
+ 314   2          pin1 = 1;
+ 315   2          pin2 = 1;
+ 316   2          pin3 = 1;
+ 317   2          M0T0delay();
+ 318   2        }
+ 319   1      }
+ 320          
+ 321          /*... 16-bit non-autoreload mode, timer_0, mode_1 ...*/
+ 322          
+ 323          void M0T0delay(void){
+ 324   1        unsigned int y;         // declaring a variable
+ 325   1        for(y=0; y<10; y++){    // for loop: for contineous iteration up to 100, then the timer delay will be cal
+             -led.
+ 326   2          TMOD = 0x01;          // 16-bit non-autoreload mode, timer_0, mode_1
+ 327   2          TL0 = 0x00; 
+ 328   2          TH0 = 0x4B;
+ 329   2          TR0 = 1;
+ 330   2          while(TF0==0);
+ 331   2          TR0 = 0;
+ 332   2          TF0 = 0;
+ 333   2        }
+ 334   1      }
+ 335          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    107    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

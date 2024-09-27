@@ -1,0 +1,102 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    03/11/2024  15:27:53  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\practice.obj TO .\Objects\practice PRINT (.\Listings\practice.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\practice.obj (PRACTICE)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\practice (PRACTICE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0020H     UNIT         ?PR?_DELAY?PRACTICE
+            CODE    0820H     0018H     UNIT         ?PR?MAIN?PRACTICE
+            CODE    0838H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\practice (PRACTICE)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PRACTICE
+
+?PR?MAIN?PRACTICE
+  +--> ?PR?_DELAY?PRACTICE
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\practice (PRACTICE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PRACTICE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:0800H         PUBLIC        _delay
+  B:00A0H.0       PUBLIC        d1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  03/11/2024  15:27:53  PAGE 2
+
+
+  D:00B8H         PUBLIC        IP
+  B:00B0H.1       PUBLIC        k1
+  C:0820H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        milliseconds
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         180
+  C:0800H         LINE#         182
+  C:080AH         LINE#         183
+  C:081FH         LINE#         184
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  C:0820H         LINE#         186
+  C:0820H         LINE#         187
+  C:0820H         LINE#         188
+  C:0823H         LINE#         189
+  C:0823H         LINE#         190
+  C:082AH         LINE#         191
+  C:082CH         LINE#         192
+  C:082FH         LINE#         193
+  C:0836H         LINE#         194
+  C:0836H         LINE#         195
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PRACTICE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0038H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=71
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,316 @@
+C51 COMPILER V9.60.7.0   TASK_12_5                                                         04/22/2024 13:40:57 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_12_5
+OBJECT MODULE PLACED IN .\Objects\task_12_5.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_12_5.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\task_12_5.lst) TABS(2) OBJECT(.\Objects\task_12_5.obj)
+
+line level    source
+
+   1          //#include <reg52.h>
+   2          
+   3          //sbit led1 = P2^0;
+   4          //sbit led8 = P2^7;
+   5          //sbit led7 = P2^6;
+   6          
+   7          //sbit pin1 = P2^2;
+   8          //sbit pin2 = P2^3;
+   9          //sbit pin3 = P2^4;
+  10          //unsigned int x = 0;
+  11          
+  12          
+  13          //void timer0(void) interrupt 1{
+  14          //    led1 = ~led1;
+  15          //    x++;
+  16          //    led8 = ~led8;
+  17          //  
+  18          //    // display__0
+  19          //    if (x==1){
+  20          //    pin1 = 0;
+  21          //    pin2 = 0;
+  22          //    pin3 = 0;
+  23          //    led7 = ~led7;
+  24          ////    LED = 0xFF;
+  25          ////    led1 = ~led1;
+  26          //    }
+  27          //      
+  28          //    if (x==2){
+  29          //    //  display__1
+  30          //    pin1 = 1;
+  31          //    pin2 = 0;
+  32          //    pin3 = 0;
+  33          ////    LED = 0xFF;
+  34          //    }
+  35          //    
+  36          //    if (x==3){
+  37          //    //  display__2
+  38          //    pin1 = 0;
+  39          //    pin2 = 1;
+  40          //    pin3 = 0;
+  41          ////    LED = 0xFF;
+  42          //    }
+  43          //    
+  44          //    if (x==4){
+  45          //    //  display__3
+  46          //    pin1 = 1;
+  47          //    pin2 = 1;
+  48          //    pin3 = 0;
+  49          ////    LED = 0xFF;
+  50          //    }
+  51          //    
+  52          //    if (x==5){
+  53          //    //  display__4
+  54          //    pin1 = 0;
+C51 COMPILER V9.60.7.0   TASK_12_5                                                         04/22/2024 13:40:57 PAGE 2   
+
+  55          //    pin2 = 0;
+  56          //    pin3 = 1;
+  57          ////    LED = 0xFF;
+  58          //    }
+  59          //    
+  60          //    if (x==6){
+  61          //    //  display__5
+  62          //    pin1 = 1;
+  63          //    pin2 = 0;
+  64          //    pin3 = 1;
+  65          ////    LED = 0xFF;
+  66          //    }
+  67          //    
+  68          //    if (x==7){
+  69          //    //  display__6
+  70          //    pin1 = 0;
+  71          //    pin2 = 1;
+  72          //    pin3 = 1;
+  73          ////    LED = 0xFF;
+  74          //    }
+  75          //    
+  76          //    if (x==8){
+  77          //    //  display__7
+  78          //    pin1 = 1;
+  79          //    pin2 = 1;
+  80          //    pin3 = 1;
+  81          ////    LED = 0xFF;
+  82          //    x=0;
+  83          //    }
+  84          //}
+  85          
+  86          
+  87          
+  88          
+  89          //void timer(){
+  90          //  TMOD = 0x01; // 16-bit non-auto reload mode
+  91          //   TL0=0xFF;
+  92          //   TH0=0xDB;
+  93          //   IE = 0x82;
+  94          //   TR0=1;
+  95          //   while (TF0==0);
+  96          //   TR0=0;
+  97          //   TF0=0;
+  98          //}
+  99          
+ 100          //void main(){
+ 101          //  void timer();
+ 102          //  
+ 103          ////  while (1){
+ 104          ////  //....
+ 105          ////  } 
+ 106          //}
+ 107          
+ 108          
+ 109          
+ 110          
+ 111          
+ 112          
+ 113          
+ 114          
+ 115          
+ 116          //////void msdelay(void){
+C51 COMPILER V9.60.7.0   TASK_12_5                                                         04/22/2024 13:40:57 PAGE 3   
+
+ 117          //////  TMOD = 0x01; // 16-bit non-auto reload mode
+ 118          //////   TL0=0xFD;
+ 119          //////   TH0=0x4B;
+ 120          //////   TR0=1;
+ 121          //////   while (TF0==0);
+ 122          //////   TR0=0;
+ 123          //////   TF0=0;
+ 124          //////}
+ 125          
+ 126          
+ 127          
+ 128          
+ 129          
+ 130          
+ 131          // -------------------------------------------------------------------------------------------------------
+             -------------------------------------------------------
+ 132          ////    if (x==2){
+ 133          ////    //  display__1
+ 134          ////    pin1 = 1;
+ 135          ////    pin2 = 0;
+ 136          ////    pin3 = 0;
+ 137          //////    LED = 0xFF;
+ 138          ////    }
+ 139          ////    
+ 140          ////    if (x==3){
+ 141          ////    //  display__2
+ 142          ////    pin1 = 0;
+ 143          ////    pin2 = 1;
+ 144          ////    pin3 = 0;
+ 145          //////    LED = 0xFF;
+ 146          ////    }
+ 147          ////    
+ 148          ////    if (x==4){
+ 149          ////    //  display__3
+ 150          ////    pin1 = 1;
+ 151          ////    pin2 = 1;
+ 152          ////    pin3 = 0;
+ 153          //////    LED = 0xFF;
+ 154          ////    }
+ 155          ////    
+ 156          ////    if (x==5){
+ 157          ////    //  display__4
+ 158          ////    pin1 = 0;
+ 159          ////    pin2 = 0;
+ 160          ////    pin3 = 1;
+ 161          //////    LED = 0xFF;
+ 162          ////    }
+ 163          ////    
+ 164          ////    if (x==6){
+ 165          ////    //  display__5
+ 166          ////    pin1 = 1;
+ 167          ////    pin2 = 0;
+ 168          ////    pin3 = 1;
+ 169          //////    LED = 0xFF;
+ 170          ////    }
+ 171          ////    
+ 172          ////    if (x==7){
+ 173          ////    //  display__6
+ 174          ////    pin1 = 0;   
+ 175          ////    pin2 = 1;
+ 176          ////    pin3 = 1;
+ 177          //////    LED = 0xFF;
+C51 COMPILER V9.60.7.0   TASK_12_5                                                         04/22/2024 13:40:57 PAGE 4   
+
+ 178          ////    }
+ 179          ////    
+ 180          
+ 181          
+ 182          
+ 183          
+ 184          
+ 185          
+ 186          
+ 187          
+ 188          
+ 189          
+ 190          
+ 191          
+ 192          
+ 193          
+ 194          
+ 195          
+ 196          
+ 197          // -------------------------------------------------
+ 198          
+ 199          
+ 200          #include<reg51.h>
+ 201          
+ 202          // define the input pins for LEDs
+ 203          sbit A0=P2^2;
+ 204          sbit A1=P2^3;
+ 205          sbit A2=P2^4;
+ 206          
+ 207          sbit led1 =P2^0;
+ 208           
+ 209          void Timer0_delay()  // define function for delay of 65usec(maximum delay of timer)
+ 210          {
+ 211   1        TMOD = 0x01;      // select timer_1 mode_1
+ 212   1        TL1 = 0xCA;       // calculation for delay of 60msec NOTED
+ 213   1        TH1 = 0xFF;
+ 214   1        TR1 = 1;         // Timer ON
+ 215   1        while(TF1==0);  // Run the LOOP untill the overflow occure
+ 216   1        TR1=0;          // Turn OFF the Timer
+ 217   1        TF1=0;          // Clear the Flag
+ 218   1      }
+ 219          
+ 220          
+ 221          
+ 222          void main(void)
+ 223          { 
+ 224   1        unsigned int i; 
+ 225   1          led1 = ~led1;
+ 226   1        for(i=0; i<232; i++)  // call the timer 8333 times for delay of 500ms
+ 227   1        {
+ 228   2          
+ 229   2          Timer0_delay();
+ 230   2        }
+ 231   1        
+ 232   1        
+ 233   1      //  A2=1;A1=1;A0=1;        // Turn ON the LED_01
+ 234   1      //  for(i=0; i<8333; i++)  // call the timer 8333 times for delay of 500ms
+ 235   1      //  {
+ 236   1      //    Timer0_delay();
+ 237   1      //  }
+ 238   1      //   
+ 239   1      //  A2=1;A1=1;A0=0;      // Turn ON the LED_02.  74hc138 decoder is used to turn ON  the LEDs 
+C51 COMPILER V9.60.7.0   TASK_12_5                                                         04/22/2024 13:40:57 PAGE 5   
+
+ 240   1      //  for(i=0; i<8333; i++)
+ 241   1      //  {
+ 242   1      //    Timer0_delay();
+ 243   1      //  }
+ 244   1      //    A2=1;A1=0;A0=1;     // Turn ON the LED_03.  74hc138 decoder is used to turn ON  the LEDs
+ 245   1      //  for(i=0; i<8333; i++)
+ 246   1      //  {
+ 247   1      //    Timer0_delay();
+ 248   1      //  }
+ 249   1      //  
+ 250   1      //  A2=1;A1=0;A0=0;      // Turn ON the LED_04.  74hc138 decoder is used to turn ON  the LEDs
+ 251   1      //  for(i=0; i<8333; i++)
+ 252   1      //  {
+ 253   1      //    Timer0_delay();
+ 254   1      //  }
+ 255   1      //    A2=0;A1=1;A0=1;   // Turn ON the LED_05.  74hc138 decoder is used to turn ON  the LEDs
+ 256   1      //  for(i=0; i<8333; i++)
+ 257   1      //  {
+ 258   1      //    Timer0_delay();
+ 259   1      //  }
+ 260   1      //  
+ 261   1      //  A2=0;A1=1;A0=0;    // Turn ON the LED_06.  74hc138 decoder is used to turn ON  the LEDs
+ 262   1      //  for(i=0; i<8333; i++)
+ 263   1      //  {
+ 264   1      //    Timer0_delay();
+ 265   1      //  }
+ 266   1      //    A2=0;A1=0;A0=1;     // Turn ON the LED_07.  74hc138 decoder is used to turn ON  the LEDs
+ 267   1      //  for(i=0; i<8333; i++)
+ 268   1      //  {
+ 269   1      //    Timer0_delay();
+ 270   1      //  }
+ 271   1      //  
+ 272   1      //  A2=0;A1=0;A0=0;     // Turn ON the LED_02.  74hc138 decoder is used to turn ON  the LEDs
+ 273   1      //  for(i=0; i<8333; i++)
+ 274   1      //  {
+ 275   1      //    Timer0_delay();
+ 276   1      //  }
+ 277   1      
+ 278   1        while(1){
+ 279   2      //  led1 = ~led1;
+ 280   2      //  Timer0_delay();
+ 281   2        }
+ 282   1      
+ 283   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     40    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

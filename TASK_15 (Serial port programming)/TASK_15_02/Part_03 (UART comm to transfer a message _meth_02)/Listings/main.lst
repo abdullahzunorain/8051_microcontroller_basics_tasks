@@ -1,0 +1,62 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              06/25/2024 13:10:34 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          // Write an 8051 C program to transfer the message "YES" serially at 9600 baud, 8-bit data, 1 stop bit. Do
+             - this continuously
+   2          
+   3          #include <reg51.h>
+   4          void delay(){
+   5   1        unsigned int i;
+   6   1        for(i=0; i<=7000; i++);
+   7   1      }
+   8          
+   9          void SerTx(unsigned char);
+  10          void main(void)
+  11          {
+  12   1          TMOD=0x20;          // use Timer 1, mode 2
+  13   1          TH1=0xFD;           // 9600 baud rate
+  14   1          SCON=0x50;
+  15   1          TR1=1;              // start timer
+  16   1          
+  17   1        while (1) {
+  18   2              SerTx('Y');
+  19   2              SerTx('E');
+  20   2              SerTx('S');
+  21   2            
+  22   2              SerTx('L');
+  23   2              SerTx('O');
+  24   2              SerTx('L');
+  25   2            
+  26   2              SerTx('\n');     // Newline character
+  27   2              SerTx('\r');     // Carriage return character
+  28   2          }
+  29   1      }
+  30          
+  31          void SerTx(unsigned char x)
+  32          {
+  33   1          SBUF=x;             // place value in buffer
+  34   1          while (TI==0);      // wait until transmitted
+  35   1          TI=0;
+  36   1          delay();
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     78    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

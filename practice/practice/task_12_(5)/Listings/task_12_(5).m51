@@ -1,0 +1,102 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    04/22/2024  13:40:57  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\task_12_5.obj TO .\Objects\task_12_(5) PRINT (.\Listings\task_12_(5).m51) RAMSIZE 
+>> (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\task_12_5.obj (TASK_12_5)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\task_12_(5) (TASK_12_5)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0015H     UNIT         ?PR?MAIN?TASK_12_5
+            CODE    0815H     0013H     UNIT         ?PR?TIMER0_DELAY?TASK_12_5
+            CODE    0828H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\task_12_(5) (TASK_12_5)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TASK_12_5
+
+?PR?MAIN?TASK_12_5
+  +--> ?PR?TIMER0_DELAY?TASK_12_5
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\task_12_(5) (TASK_12_5)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TASK_12_5
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0800H         PUBLIC        main
+  C:0815H         PUBLIC        Timer0_delay
+  D:0089H         PUBLIC        TMOD
+  B:0088H.7       PUBLIC        TF1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/22/2024  13:40:57  PAGE 2
+
+
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  B:0088H.6       PUBLIC        TR1
+  B:00A0H.0       PUBLIC        led1
+  -------         PROC          TIMER0_DELAY
+  C:0815H         LINE#         209
+  C:0815H         LINE#         210
+  C:0815H         LINE#         211
+  C:0818H         LINE#         212
+  C:081BH         LINE#         213
+  C:081EH         LINE#         214
+  C:0820H         LINE#         215
+  C:0823H         LINE#         216
+  C:0825H         LINE#         217
+  C:0827H         LINE#         218
+  -------         ENDPROC       TIMER0_DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0800H         LINE#         222
+  C:0800H         LINE#         223
+  C:0800H         LINE#         225
+  C:0802H         LINE#         226
+  C:0805H         LINE#         227
+  C:0805H         LINE#         229
+  C:0808H         LINE#         230
+  C:0813H         LINE#         278
+  C:0813H         LINE#         281
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TASK_12_5
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0028H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=55
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

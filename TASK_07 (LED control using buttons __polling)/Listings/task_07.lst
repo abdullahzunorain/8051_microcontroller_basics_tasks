@@ -1,0 +1,65 @@
+C51 COMPILER V9.60.7.0   TASK_07                                                           09/20/2024 12:06:13 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_07
+OBJECT MODULE PLACED IN .\Objects\task_07.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_07.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\t
+                    -ask_07.lst) TABS(2) OBJECT(.\Objects\task_07.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          // button's
+   3          sbit btn0 = P3^1;
+   4          sbit btn1 = P3^0;
+   5          sbit btn2 = P3^2;
+   6          sbit btn3 = P3^3;
+   7          // led's
+   8          sbit led_0 = P2^0;
+   9          sbit led_1 = P2^1;
+  10          sbit led_2 = P2^2;
+  11          sbit led_3 = P2^3;
+  12          
+  13          void msdelay(unsigned int);
+  14          
+  15          void main(){
+  16   1        while(1){
+  17   2          if(btn0 == 0){
+  18   3            led_0 = ~led_0;
+  19   3            msdelay(250);
+  20   3          }
+  21   2          if(btn1 == 0){
+  22   3            led_1 = ~led_1;
+  23   3            msdelay(250);
+  24   3          }
+  25   2          if(btn2 == 0){
+  26   3            led_2 = ~led_2;
+  27   3            msdelay(250);
+  28   3          }
+  29   2          if(btn3 == 0){
+  30   3            led_3 = ~led_3;
+  31   3            msdelay(250);
+  32   3          }
+  33   2        }
+  34   1      }
+  35          
+  36          
+  37          void msdelay(unsigned int delay) {
+  38   1          unsigned int i, j;
+  39   1          for(i = 0; i < delay; i++)
+  40   1              for(j = 0; j < 175; j++);
+  41   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     70    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,232 @@
+C51 COMPILER V9.60.7.0   TASK_14_4                                                         05/24/2024 22:27:43 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_14_4
+OBJECT MODULE PLACED IN .\Objects\task_14_4.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_14_4.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\task_14_4.lst) TABS(2) OBJECT(.\Objects\task_14_4.obj)
+
+line level    source
+
+   1          //////////#include <reg51.h>
+   2          
+   3          //////////// Define the data port and control pins
+   4          //////////#define lcd_data P0
+   5          
+   6          //////////sbit rs = P2^6;  // Register select pin
+   7          //////////sbit rw = P2^5;  // Read/Write pin
+   8          //////////sbit en = P2^7;  // Enable pin
+   9          
+  10          //////////// Function prototypes
+  11          //////////void lcd_init();                       // Initialize the LCD
+  12          //////////void lcd_cmd(unsigned char cmd);       // Send command to the LCD
+  13          //////////void lcd_data(unsigned char data);     // Send data to the LCD
+  14          //////////void lcd_set_cursor(unsigned char row, unsigned char col);  // Set cursor position
+  15          //////////void lcd_write(unsigned char row, unsigned char col, unsigned char data);  // Write data at spec
+             -ific position
+  16          //////////void lcd_clear();                      // Clear the display
+  17          //////////void lcd_delay();                      // Delay function for LCD timing
+  18          
+  19          //////////// Function to initialize the LCD
+  20          //////////void lcd_init() {
+  21          //////////    lcd_cmd(0x38); // Initialize the LCD in 8-bit mode, 2 lines, 5x7 matrix
+  22          //////////    lcd_cmd(0x0C); // Display ON, cursor OFF
+  23          //////////    lcd_cmd(0x06); // Entry mode, auto increment with no shift
+  24          //////////    lcd_cmd(0x01); // Clear display screen
+  25          //////////    lcd_cmd(0x80); // Set cursor position to the beginning of the first line
+  26          //////////}
+  27          
+  28          //////////// Function to send a command to the LCD
+  29          //////////void lcd_cmd(unsigned char cmd) {
+  30          //////////    lcd_data = cmd; // Place command on data port
+  31          //////////    rs = 0;         // Select command register
+  32          //////////    rw = 0;         // Write operation
+  33          //////////    en = 1;         // Generate enable pulse
+  34          //////////    lcd_delay();    // Wait for the command to be processed
+  35          //////////    en = 0;         // End enable pulse
+  36          //////////}
+  37          
+  38          //////////// Function to send data to the LCD
+  39          //////////void lcd_data(unsigned char data) {
+  40          //////////    lcd_data = data; // Place data on data port
+  41          //////////    rs = 1;          // Select data register
+  42          //////////    rw = 0;          // Write operation
+  43          //////////    en = 1;          // Generate enable pulse
+  44          //////////    lcd_delay();     // Wait for the data to be processed
+  45          //////////    en = 0;          // End enable pulse
+  46          //////////}
+  47          
+  48          //////////// Function to set the cursor position
+  49          //////////void lcd_set_cursor(unsigned char row, unsigned char col) {
+  50          //////////    unsigned char pos;
+  51          //////////    if (row == 0)
+  52          //////////        pos = 0x80 + col; // Set cursor position for the first line
+  53          //////////    else if (row == 1)
+C51 COMPILER V9.60.7.0   TASK_14_4                                                         05/24/2024 22:27:43 PAGE 2   
+
+  54          //////////        pos = 0xC0 + col; // Set cursor position for the second line
+  55          //////////    lcd_cmd(pos); // Send command to set the cursor position
+  56          //////////}
+  57          
+  58          //////////// Function to write data at a specific position
+  59          //////////void lcd_write(unsigned char row, unsigned char col, unsigned char data) {
+  60          //////////    lcd_set_cursor(row, col); // Set cursor to specified position
+  61          //////////    lcd_data(data);           // Write data at that position
+  62          //////////}
+  63          
+  64          //////////// Function to clear the display
+  65          //////////void lcd_clear() {
+  66          //////////    lcd_cmd(0x01); // Clear display screen
+  67          //////////    lcd_delay();   // Wait for the command to be processed
+  68          //////////}
+  69          
+  70          //////////// Delay function for LCD timing
+  71          //////////void lcd_delay() {
+  72          //////////    unsigned int delay;
+  73          //////////    for (delay = 0; delay <= 6000; delay++); // Simple delay loop
+  74          //////////}
+  75          
+  76          //////////// Main function
+  77          //////////int main() {
+  78          //////////    lcd_init(); // Initialize the LCD
+  79          
+  80          //////////    // Example usage
+  81          //////////    lcd_write(0, 0, 'H');  // Write 'H' at the beginning of the first line
+  82          //////////    lcd_write(0, 1, 'e');  // Write 'e' at the second position of the first line
+  83          //////////    lcd_write(0, 2, 'l');  // Write 'l' at the third position of the first line
+  84          //////////    lcd_write(0, 3, 'l');  // Write 'l' at the fourth position of the first line
+  85          //////////    lcd_write(0, 4, 'o');  // Write 'o' at the fifth position of the first line
+  86          
+  87          //////////    lcd_set_cursor(1, 0); // Set cursor to the beginning of the second line
+  88          //////////    lcd_write(1, 0, 'W'); // Write 'W' at the beginning of the second line
+  89          //////////    lcd_write(1, 1, 'o'); // Write 'o' at the second position of the second line
+  90          //////////    lcd_write(1, 2, 'r'); // Write 'r' at the third position of the second line
+  91          //////////    lcd_write(1, 3, 'l'); // Write 'l' at the fourth position of the second line
+  92          //////////    lcd_write(1, 4, 'd'); // Write 'd' at the fifth position of the second line
+  93          
+  94          //////////    while(1); // Infinite loop to keep the microcontroller running
+  95          //////////}
+  96          
+  97          
+  98          
+  99          
+ 100          
+ 101          
+ 102          
+ 103          
+ 104          
+ 105          
+ 106          #include <reg51.h>
+ 107          
+ 108          sbit rs = P2^6;
+ 109          sbit rw = P2^5;
+ 110          sbit en = P2^7;
+ 111          
+ 112          #define text P0
+ 113          
+ 114          void delay() {
+ 115   1          int i, j;
+C51 COMPILER V9.60.7.0   TASK_14_4                                                         05/24/2024 22:27:43 PAGE 3   
+
+ 116   1          for(i = 0; i < 100; i++) {
+ 117   2              for (j = 0; j < 100; j++);
+ 118   2          }
+ 119   1      }
+ 120          
+ 121          // Add lcd_delay function prototype
+ 122          void lcd_delay();
+ 123          
+ 124          // Define lcd_delay function
+ 125          void lcd_delay() {
+ 126   1          delay();
+ 127   1      }
+ 128          
+ 129          void lcd_cmd(unsigned char a) {
+ 130   1          text = a;
+ 131   1          rs = 0;
+ 132   1          rw = 0;
+ 133   1          en = 1;
+ 134   1          lcd_delay();
+ 135   1          en = 0;
+ 136   1      }
+ 137          
+ 138          void lcd_data(unsigned char b) {
+ 139   1          text = b;
+ 140   1          rs = 1;
+ 141   1          rw = 0;
+ 142   1          en = 1;
+ 143   1          lcd_delay();
+ 144   1          en = 0;
+ 145   1      }
+ 146          
+ 147          void lcd_init() {
+ 148   1          lcd_cmd(0x01);
+ 149   1          delay();
+ 150   1          lcd_cmd(0x38);
+ 151   1          delay();
+ 152   1          lcd_cmd(0x0E);
+ 153   1          delay();
+ 154   1          lcd_cmd(0x10);
+ 155   1          delay();
+ 156   1          lcd_cmd(0x80);
+ 157   1          delay();
+ 158   1      }
+ 159          
+ 160          int main() {
+ 161   1          text = 0x00;
+ 162   1          lcd_init();
+ 163   1          
+ 164   1          lcd_data('Z');
+ 165   1          delay();
+ 166   1      
+ 167   1          lcd_data('U');
+ 168   1          delay();
+ 169   1      
+ 170   1          lcd_data('L');
+ 171   1          delay();    
+ 172   1          
+ 173   1          lcd_data('Q');
+ 174   1          delay();
+ 175   1          lcd_data('A');
+ 176   1          delay();   
+ 177   1      
+C51 COMPILER V9.60.7.0   TASK_14_4                                                         05/24/2024 22:27:43 PAGE 4   
+
+ 178   1          lcd_data('R');
+ 179   1          delay();
+ 180   1          
+ 181   1          lcd_data('N');
+ 182   1          delay();    
+ 183   1      
+ 184   1          lcd_data('A');
+ 185   1          delay();    
+ 186   1          
+ 187   1          lcd_data('I');
+ 188   1          delay();    
+ 189   1          
+ 190   1          lcd_data('N');
+ 191   1          delay();    
+ 192   1          
+ 193   1      //    lcd_data('N');
+ 194   1      //    delay();    
+ 195   1      //    
+ 196   1      //    lcd_data('*');
+ 197   1      //    delay();
+ 198   1          
+ 199   1          // Return statement for main function
+ 200   1          return 0;        
+ 201   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    179    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

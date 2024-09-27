@@ -1,0 +1,255 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/23/2024  10:43:25  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\TASK_15_03 PRINT (.\Listings\TASK_15_03.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (STRNCPY)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CSTOPTR)
+
+
+LINK MAP OF MODULE:  .\Objects\TASK_15_03 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0012H     UNIT         ?DT?MAIN
+            DATA    001AH     000DH     UNIT         _DATA_GROUP_
+            IDATA   0027H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0068H     UNIT         ?C?LIB_CODE
+            CODE    006BH     0052H     UNIT         ?PR?_STRNCPY?STRNCPY
+            CODE    00BDH     003BH     UNIT         ?PR?MAIN?MAIN
+            CODE    00F8H     002BH     UNIT         ?PR?_LCD_STRING?MAIN
+            CODE    0123H     0028H     UNIT         ?PR?_DELAY?MAIN
+            CODE    014BH     0020H     UNIT         ?PR?LCD_INIT?MAIN
+            CODE    016BH     001FH     UNIT         ?PR?_CNVRT_ARRAY_INT_STRING?MAIN
+            CODE    018AH     000DH     UNIT         ?PR?_LCD_CMD?MAIN
+            CODE    0197H     000DH     UNIT         ?PR?_LCD_DAT?MAIN
+            CODE    01A4H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\TASK_15_03 (MAIN)
+
+
+SEGMENT                                    DATA_GROUP 
+  +--> CALLED SEGMENT                    START    LENGTH
+--------------------------------------------------------
+?C_C51STARTUP                            -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                            -----    -----
+  +--> ?PR?LCD_INIT?MAIN
+  +--> ?PR?_CNVRT_ARRAY_INT_STRING?MAIN
+  +--> ?PR?_LCD_STRING?MAIN
+
+?PR?LCD_INIT?MAIN                        -----    -----
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/23/2024  10:43:25  PAGE 2
+
+
+  +--> ?PR?_DELAY?MAIN
+  +--> ?PR?_LCD_CMD?MAIN
+
+?PR?_LCD_CMD?MAIN                        -----    -----
+  +--> ?PR?_DELAY?MAIN
+
+?PR?_CNVRT_ARRAY_INT_STRING?MAIN         001AH    0003H
+  +--> ?PR?_STRNCPY?STRNCPY
+
+?PR?_STRNCPY?STRNCPY                     001DH    000AH
+
+?PR?_LCD_STRING?MAIN                     001AH    0005H
+  +--> ?PR?_LCD_DAT?MAIN
+
+?PR?_LCD_DAT?MAIN                        -----    -----
+  +--> ?PR?_DELAY?MAIN
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   MYSTRING
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\TASK_15_03 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  C:012BH         PUBLIC        _delay
+  D:0008H         PUBLIC        string
+  B:0098H.0       PUBLIC        RI
+  C:00BDH         PUBLIC        main
+  C:00F8H         PUBLIC        _LCD_String
+  D:0099H         PUBLIC        SBUF
+  D:0087H         PUBLIC        PCON
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  C:018AH         PUBLIC        _LCD_Cmd
+  C:014BH         PUBLIC        LCD_Init
+  D:008DH         PUBLIC        TH1
+  B:00A0H.7       PUBLIC        en
+  B:0088H.6       PUBLIC        TR1
+  C:016BH         PUBLIC        _cnvrt_array_int_string
+  B:00A0H.6       PUBLIC        rs
+  D:0018H         PUBLIC        i
+  B:00A0H.5       PUBLIC        rw
+  D:0019H         PUBLIC        k
+  C:0197H         PUBLIC        _LCD_dat
+  -------         PROC          L?0027
+  -------         ENDPROC       L?0027
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        count
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/23/2024  10:43:25  PAGE 3
+
+
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:012BH         LINE#         149
+  C:012BH         LINE#         150
+  C:012BH         LINE#         152
+  C:0135H         LINE#         153
+  C:014AH         LINE#         154
+  -------         ENDPROC       _DELAY
+  -------         PROC          _LCD_CMD
+  D:0007H         SYMBOL        f
+  C:018AH         LINE#         156
+  C:018AH         LINE#         157
+  C:018AH         LINE#         158
+  C:018CH         LINE#         159
+  C:018EH         LINE#         160
+  C:018EH         LINE#         161
+  C:018EH         LINE#         162
+  C:0191H         LINE#         163
+  C:0193H         LINE#         164
+  -------         ENDPROC       _LCD_CMD
+  -------         PROC          _LCD_DAT
+  D:0007H         SYMBOL        d
+  C:0197H         LINE#         167
+  C:0197H         LINE#         168
+  C:0197H         LINE#         170
+  C:0199H         LINE#         171
+  C:019BH         LINE#         172
+  C:019BH         LINE#         173
+  C:019BH         LINE#         174
+  C:019EH         LINE#         175
+  C:01A0H         LINE#         176
+  -------         ENDPROC       _LCD_DAT
+  -------         PROC          _LCD_STRING
+  D:001AH         SYMBOL        str
+  -------         DO            
+  D:001DH         SYMBOL        i
+  -------         ENDDO         
+  C:00F8H         LINE#         179
+  C:00FEH         LINE#         180
+  C:00FEH         LINE#         182
+  C:0115H         LINE#         183
+  C:0115H         LINE#         184
+  C:0118H         LINE#         185
+  C:0122H         LINE#         186
+  -------         ENDPROC       _LCD_STRING
+  -------         PROC          LCD_INIT
+  C:014BH         LINE#         197
+  C:014BH         LINE#         198
+  C:014BH         LINE#         199
+  C:0152H         LINE#         200
+  C:0157H         LINE#         201
+  C:015CH         LINE#         202
+  C:0161H         LINE#         203
+  C:0166H         LINE#         204
+  -------         ENDPROC       LCD_INIT
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/23/2024  10:43:25  PAGE 4
+
+
+  -------         PROC          _CNVRT_ARRAY_INT_STRING
+  D:001AH         SYMBOL        charArray
+  C:016BH         LINE#         207
+  C:0171H         LINE#         209
+  C:0186H         LINE#         210
+  C:0189H         LINE#         211
+  -------         ENDPROC       _CNVRT_ARRAY_INT_STRING
+  -------         PROC          MAIN
+  C:00BDH         LINE#         213
+  C:00BDH         LINE#         214
+  C:00BDH         LINE#         215
+  C:00C0H         LINE#         217
+  C:00C3H         LINE#         218
+  C:00C6H         LINE#         219
+  C:00C9H         LINE#         220
+  C:00CCH         LINE#         221
+  C:00CEH         LINE#         222
+  C:00CEH         LINE#         223
+  C:00CEH         LINE#         224
+  C:00D1H         LINE#         225
+  C:00D1H         LINE#         226
+  C:00D4H         LINE#         227
+  C:00D6H         LINE#         228
+  C:00DDH         LINE#         229
+  C:00E4H         LINE#         230
+  C:00EDH         LINE#         231
+  C:00F6H         LINE#         233
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0003H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        STRNCPY
+  D:001DH         PUBLIC        ?_strncpy?BYTE
+  C:006BH         PUBLIC        _strncpy
+  -------         ENDMOD        STRNCPY
+
+  -------         MODULE        ?C?CLDPTR
+  C:0030H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:0049H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  MYSTRING
+    MODULE:  .\Objects\main.obj (MAIN)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MYSTRING
+    MODULE:  .\Objects\main.obj (MAIN)
+    ADDRESS: 00D7H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/23/2024  10:43:25  PAGE 5
+
+
+    SYMBOL:  MYSTRING
+    MODULE:  .\Objects\main.obj (MAIN)
+    ADDRESS: 00E7H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MYSTRING
+    MODULE:  .\Objects\main.obj (MAIN)
+    ADDRESS: 00E9H
+
+Program Size: data=40.0 xdata=0 code=432
+LINK/LOCATE RUN COMPLETE.  4 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,129 @@
+C51 COMPILER V9.60.7.0   TASK_05                                                           09/20/2024 11:56:27 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_05
+OBJECT MODULE PLACED IN .\Objects\task_05.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_05.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\t
+                    -ask_05.lst) TABS(2) OBJECT(.\Objects\task_05.obj)
+
+line level    source
+
+   1          
+   2          /* Task 5 : Button interfacing using polling;
+   3          Write a C program to read the button state using polling. If button K1 is pressed it should turn on 
+   4          LED D1. If pressed again it should turn off the LED D1. Add debouncing in the code so one button 
+   5          press is detected only once. This should continue in a loop. 
+   6           */
+   7          
+   8          #include <reg52.h>
+   9          
+  10          sbit led_1 = P2^0;
+  11          sbit button = P3^1;
+  12          
+  13          void delay(unsigned int milliseconds) {
+  14   1          unsigned int i, j;
+  15   1          for(i = 0; i < milliseconds; i++)
+  16   1              for(j = 0; j < 125; j++);  // Delay approximation for 1 ms
+  17   1      }
+  18          
+  19          void main(void) {
+  20   1      
+  21   1          while(1) {
+  22   2              if(button == 0) {
+  23   3                  delay(20); // Debounce delay
+  24   3                  if(button == 1) {
+  25   4                      led_1 = !led_1; // Toggle LED state
+  26   4                      while(button == 1); // Wait for button release
+  27   4                      delay(20); // Debounce delay for button release
+  28   4                  }
+  29   3              }
+  30   2          }
+  31   1      }
+  32          
+  33          
+  34          
+  35          
+  36          
+  37          // Task_05:  If button K1 is pressed it should turn on LED D1. If pressed again it should turn off the LED
+             - D1.
+  38          
+  39          /*
+  40          
+  41          #include <reg52.h>
+  42          sbit B1 = P3^1;
+  43          sbit D1 = P2^0;
+  44          
+  45          void msdelay(unsigned int m_sec);
+  46          
+  47          void main (){
+  48            while(1){
+  49              if(B1 == 1){
+  50                msdelay(50);
+  51                if(B1 == 1){
+  52                    D1 = ~D1;
+  53                  }
+C51 COMPILER V9.60.7.0   TASK_05                                                           09/20/2024 11:56:27 PAGE 2   
+
+  54                while(B1==1){
+  55                    msdelay(50);
+  56                  }
+  57              }
+  58            }
+  59          }
+  60            
+  61          
+  62          
+  63          void msdelay(unsigned int m_sec){
+  64            unsigned int i, j;
+  65            for (i=0; i<m_sec; i++)
+  66              for(j=0; j<15; j++);
+  67          }
+  68          
+  69          */
+  70          
+  71          
+  72          
+  73          // Task # 05:  If button K1 is pressed it should turn on LED D1. If pressed again it should turn off the L
+             -ED D1.
+  74          // but if button is pressed for more than the delay time & kept pressed, so it will be toggles.
+  75          
+  76          /*
+  77          
+  78          # include <reg52.h>
+  79          sbit k1 = P3^1;
+  80          sbit d1 = P2^0;
+  81          
+  82          void delay(unsigned int milliseconds) {
+  83              unsigned int i, j;
+  84              for(i = 0; i < milliseconds; i++)
+  85                  for(j = 0; j < 1275; j++);  // Delay approximation for 1 ms
+  86          }
+  87          
+  88          void main(){
+  89            while(1){
+  90            if (k1==0)
+  91            {
+  92              delay(10);
+  93              d1 = !d1;
+  94              while(k1==1);
+  95              delay(10);
+  96            }
+  97          }
+  98          }
+  99          
+ 100          
+ 101          */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     59    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

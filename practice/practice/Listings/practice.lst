@@ -1,0 +1,235 @@
+C51 COMPILER V9.60.7.0   PRACTICE                                                          03/11/2024 15:27:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE PRACTICE
+OBJECT MODULE PLACED IN .\Objects\practice.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE practice.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -practice.lst) TABS(2) OBJECT(.\Objects\practice.obj)
+
+line level    source
+
+   1          ///* #LED(`D1`) blinking using `msdelay` function (delay size should be `1` sec) */
+   2          
+   3          //#include <reg52.h>
+   4          
+   5          //#define LED_PORT P2
+   6          
+   7          //void msdelay(unsigned int);
+   8          
+   9          //void main(void) {
+  10          //    for (;;) 
+  11          //      {
+  12          //        LED_PORT |= 0x01;  // Set bit 0 of P2 to turn on the LED
+  13          //        msdelay(988);  // Delay for approximately 500 ms
+  14          //        LED_PORT &= ~0x01;  // Clear bit 0 of P2 to turn off the LED
+  15          //        msdelay(988);  // Delay for approximately 500 ms
+  16          //      }
+  17          //}
+  18          
+  19          //void msdelay(unsigned int X) {
+  20          //    unsigned int i, j;
+  21          //    for (i = 0; i < X; i++)
+  22          //        for (j = 0; j < 115; j++);  // Adjust this value for your specific delay requirement
+  23          //}
+  24          
+  25          
+  26          /*--------------------------------------------------------------------------------------------------------
+             ---------*/
+  27          
+  28          //#include <reg52.h>
+  29          
+  30          //#define LED_PORT P2
+  31          
+  32          //void msdelay(signed int);
+  33          
+  34          //void main(void) {
+  35          //    while(1) {
+  36          //        LED_PORT = 0xFE; // Set all bits of LED_PORT to 1
+  37          //        msdelay(500);    // Delay for 500 milliseconds
+  38          //        LED_PORT = LED_PORT | 0xEF; // Set the least significant bit of LED_PORT to 1
+  39          //        msdelay(500);     // Delay for 500 milliseconds
+  40          //    }
+  41          //}
+  42          
+  43          //void msdelay(signed int X) {
+  44          //    unsigned int i, j;
+  45          //    for (i = 0; i < X; i++)
+  46          //        for (j = 0; j < 15; j++);  // Adjust this value for your specific delay requirement
+  47          //}
+  48          
+  49          
+  50          
+  51          // -------------------------------------------------------------------------------------------------------
+             -------
+  52          
+C51 COMPILER V9.60.7.0   PRACTICE                                                          03/11/2024 15:27:53 PAGE 2   
+
+  53          // Q).
+  54          //#include <reg51.h>
+  55          // void main(void)
+  56          // {
+  57          // unsigned char z;
+  58          // for (z=0;z<=255;z++)
+  59          // P2=z;
+  60          // }
+  61          
+  62          // _______________________________________________________________________________________________________
+             -_______
+  63          
+  64          // Q).
+  65          //#include <reg52.h>
+  66          // void main(void)
+  67          // {
+  68          //   unsigned char mynum[]= "012345ABCD";
+  69          //   unsigned char z;
+  70          //   for (z=0;z<=10;z++)
+  71          //   P2=mynum[z];
+  72          // }
+  73          
+  74          
+  75          // -------------------------------------------------------------------------------------------------------
+             --------
+  76          
+  77          // Q).
+  78          
+  79          // //Toggle P1 forever
+  80          // #include <reg52.h>
+  81          // void main(void)
+  82          //{
+  83          //  for (;;)
+  84          //    {
+  85          //     unsigned int x;
+  86          //      for(x=0; x<5000; x++)
+  87          //     P2=0x55;
+  88          //     P1 = 0x55;
+  89          //      for(x=0; x<5000; x++)
+  90          //     P2=0xAA;
+  91          //     P1 = 0xAA;
+  92          //      for(x=0; x<1275; x++);
+  93          //    }
+  94          //}
+  95          
+  96          // Q).  Write an 8051 C program to send values of –4 to +4 to port P1.
+  97          ////Singed numbers
+  98          // #include <reg51.h>
+  99          // void main(void)
+ 100          // {
+ 101          // char mynum[]={+1,-1,+2,-2,+3,-3,+4,-4};
+ 102          // unsigned char z;
+ 103          // for (z=0; z<=8; z++)
+ 104          // P2=mynum[z];
+ 105          // }
+ 106          
+ 107          // -------------------------------------------------------------------------------------------------------
+             -------
+ 108          
+ 109          //////////#include <reg52.h>
+ 110          //////////sbit led_1 = P2^0;
+ 111          //////////sbit button = P3^1;
+C51 COMPILER V9.60.7.0   PRACTICE                                                          03/11/2024 15:27:53 PAGE 3   
+
+ 112          //////////unsigned int x;
+ 113          //////////void delay(unsigned int milliseconds) {
+ 114          //////////    unsigned int i, j;
+ 115          //////////    for(i = 0; i < milliseconds; i++)
+ 116          //////////        for(j = 0; j < 125; j++);  // Delay approximation for 1 ms
+ 117          //////////}
+ 118          
+ 119          //////////void main(void)
+ 120          //////////{
+ 121          //////////  if(button == 0){
+ 122          //////////    led_1 = 1;
+ 123          //////////  }
+ 124          //////////  else
+ 125          //////////  {
+ 126          //////////    led_1 = 0;
+ 127          //////////  }
+ 128          
+ 129          //////////}
+ 130          
+ 131          
+ 132          ////////////#include <reg52.h>
+ 133          
+ 134          ////////////sbit led_1 = P2^0;
+ 135          ////////////sbit button = P3^1;
+ 136          
+ 137          ////////////void delay(unsigned int milliseconds) {
+ 138          ////////////    unsigned int i, j;
+ 139          ////////////    for(i = 0; i < milliseconds; i++)
+ 140          ////////////        for(j = 0; j < 1275; j++);  // Delay approximation for 1 ms
+ 141          ////////////}
+ 142          
+ 143          ////////////void main(void) {
+ 144          ////////////    unsigned int buttonState =0;
+ 145          
+ 146          ////////////    while(1) {
+ 147          ////////////        if(button == 0) {
+ 148          ////////////          buttonState++;
+ 149          ////////////        delay(500);
+ 150          ////////////        }
+ 151          ////////////        if(buttonState==1)
+ 152          ////////////        {  
+ 153          ////////////          led_1=0;
+ 154          ////////////        }
+ 155          ////////////          if(buttonState==2)
+ 156          ////////////        {  
+ 157          ////////////          led_1=1;
+ 158          ////////////        }
+ 159          ////////////          if(buttonState==3)
+ 160          ////////////        {  
+ 161          ////////////          buttonState=1;
+ 162          ////////////        }
+ 163          ////////////        
+ 164          ////////////          
+ 165          ////////////           // delay(20); // Debounce delay
+ 166          ////////////            //if(button == 0) {
+ 167          ////////////                led_1 = ~led_1; // Toggle LED state
+ 168          ////////////                //while(button == 0); // Wait for button release
+ 169          ////////////                delay(50); // Debounce delay for button release
+ 170          ////////////            }
+ 171          ////////////        }
+ 172          ////////////    
+ 173          
+C51 COMPILER V9.60.7.0   PRACTICE                                                          03/11/2024 15:27:53 PAGE 4   
+
+ 174          
+ 175          
+ 176          # include <reg52.h>
+ 177          sbit k1 = P3^1;
+ 178          sbit d1 = P2^0;
+ 179          
+ 180          void delay(unsigned int milliseconds) {
+ 181   1          unsigned int i, j;
+ 182   1          for(i = 0; i < milliseconds; i++)
+ 183   1              for(j = 0; j < 1275; j++);  // Delay approximation for 1 ms
+ 184   1      }
+ 185          
+ 186          void main(){
+ 187   1        while(1){
+ 188   2        if (k1==0)
+ 189   2        {
+ 190   3          delay(10);
+ 191   3          d1 = !d1;
+ 192   3          while(k1==1);
+ 193   3          delay(10);
+ 194   3        }
+ 195   2      }
+ 196   1      }
+ 197          
+ 198          
+ 199          
+ 200          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     56    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

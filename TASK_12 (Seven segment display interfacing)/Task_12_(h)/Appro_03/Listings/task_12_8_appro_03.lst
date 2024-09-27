@@ -1,0 +1,157 @@
+C51 COMPILER V9.60.7.0   TASK_12_8_APPRO_03                                                09/20/2024 15:12:32 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_12_8_APPRO_03
+OBJECT MODULE PLACED IN .\Objects\task_12_8_appro_03.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_12_8_appro_03.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.
+                    -\Listings\task_12_8_appro_03.lst) TABS(2) OBJECT(.\Objects\task_12_8_appro_03.obj)
+
+line level    source
+
+   1          
+   2          #include<reg51.h>
+   3          
+   4          sbit A=P2^4;
+   5          sbit b=P2^3;
+   6          sbit C=P2^2;
+   7          
+   8          unsigned int message[] = {0x3f,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x67,};
+   9          unsigned int kk[]={0x03,0x0D,0x08,0x04,0x00,0X02};
+  10          unsigned int input[]={1,4,0,0,0,0,0,8};
+  11          int array[]={1,2,3,4,5};
+  12          
+  13          unsigned char x;
+  14          unsigned int i;
+  15          char z;
+  16          
+  17          void fun(unsigned char);
+  18          void delay(void);
+  19          
+  20          
+  21          void main (void){
+  22   1        while(1){
+  23   2            A=1 ; b=1 ; C=1;
+  24   2             fun(0);
+  25   2      
+  26   2            A=1 ; b=1 ; C=0;
+  27   2             fun(1);
+  28   2      
+  29   2            A=1 ; b=0 ; C=1;
+  30   2             fun(2);
+  31   2      
+  32   2              A=1 ; b=0 ; C=0;
+  33   2             fun(3);
+  34   2      
+  35   2            A=0 ; b=1 ; C=1;
+  36   2             fun(4);
+  37   2      
+  38   2              A=0 ; b=1 ; C=0;
+  39   2             fun(5);
+  40   2      
+  41   2            A=0 ; b=0 ; C=1;
+  42   2             fun(6);
+  43   2      
+  44   2              A=0 ; b=0 ; C=0;
+  45   2             fun(7);
+  46   2        }
+  47   1      }
+  48          
+  49          
+  50          void delay(void){
+  51   1        for( i=0;i<500;i++);
+  52   1          for( i=0;i<10000;i++);
+  53   1      }
+  54          
+C51 COMPILER V9.60.7.0   TASK_12_8_APPRO_03                                                09/20/2024 15:12:32 PAGE 2   
+
+  55          
+  56          void fun(unsigned char x){
+  57   1        z=x;
+  58   1        
+  59   1        if(input[x]==1){
+  60   2          for(z=0;z<10;z++){
+  61   3            P0=message[1];
+  62   3            delay();
+  63   3          }
+  64   2         }
+  65   1        
+  66   1        if(input[x]==0){
+  67   2           for(z=0;z<10;z++){
+  68   3                P0=message[0];
+  69   3                delay();
+  70   3           }
+  71   2        }
+  72   1        
+  73   1        if(input[x]==2){
+  74   2          for(z=0;z<10;z++){
+  75   3                P0=message[2];
+  76   3                delay();
+  77   3          }
+  78   2        }
+  79   1        
+  80   1        if(input[x]==3){
+  81   2         for(z=0;z<10;z++){
+  82   3           P0=message[3];
+  83   3           delay();
+  84   3         }
+  85   2        }
+  86   1        
+  87   1        if(input[x]==4){
+  88   2          for(z=0;z<10;z++){
+  89   3              P0=message[4];
+  90   3              delay();
+  91   3          }
+  92   2        }
+  93   1        
+  94   1        if(input[x]==5){
+  95   2          for(z=0;z<10;z++){
+  96   3              P0=message[5];
+  97   3              delay();        
+  98   3          }
+  99   2        }
+ 100   1        
+ 101   1        if(input[x]==6){
+ 102   2           for(z=0;z<10;z++){
+ 103   3              P0=message[6];
+ 104   3              delay();
+ 105   3          }
+ 106   2        }
+ 107   1        
+ 108   1        if(input[x]==7){
+ 109   2          for(z=0;z<10;z++){
+ 110   3              P0=message[7];
+ 111   3              delay();
+ 112   3          }
+ 113   2        }
+ 114   1        
+ 115   1        if(input[x]==8){
+ 116   2           for(z=0;z<10;z++){
+C51 COMPILER V9.60.7.0   TASK_12_8_APPRO_03                                                09/20/2024 15:12:32 PAGE 3   
+
+ 117   3              P0=message[8];
+ 118   3              delay();
+ 119   3          }
+ 120   2        }
+ 121   1        
+ 122   1        if(input[x]==9){
+ 123   2          for(z=0;z<10;z++){
+ 124   3              P0=message[9];
+ 125   3              delay();
+ 126   3          }
+ 127   2        }
+ 128   1        
+ 129   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    474    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     62    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

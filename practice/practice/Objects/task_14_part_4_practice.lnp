@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\task_14_4.obj" 
+TO ".\Objects\task_14_part_4_practice" 
+PRINT(".\Listings\task_14_part_4_practice.m51") RAMSIZE(256) 

@@ -1,0 +1,94 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/20/2024  11:06:25  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\task_01_b.obj TO .\Objects\TASK_01_(b) PRINT (.\Listings\TASK_01_(b).m51) RAMSIZE 
+>> (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\task_01_b.obj (TASK_01_B)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\TASK_01_(b) (TASK_01_B)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0020H     UNIT         ?PR?_MSDELAY?TASK_01_B
+            CODE    0023H     0016H     UNIT         ?PR?MAIN?TASK_01_B
+            CODE    0039H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\TASK_01_(b) (TASK_01_B)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TASK_01_B
+
+?PR?MAIN?TASK_01_B
+  +--> ?PR?_MSDELAY?TASK_01_B
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\TASK_01_(b) (TASK_01_B)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TASK_01_B
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0023H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/20/2024  11:06:25  PAGE 2
+
+
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  C:0003H         PUBLIC        _msdelay
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0023H         LINE#         8
+  C:0023H         LINE#         9
+  C:0023H         LINE#         10
+  C:0023H         LINE#         11
+  C:0026H         LINE#         12
+  C:002DH         LINE#         13
+  C:0030H         LINE#         14
+  C:0037H         LINE#         15
+  -------         ENDPROC       MAIN
+  -------         PROC          _MSDELAY
+  D:0006H         SYMBOL        X
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0003H         LINE#         18
+  C:0003H         LINE#         20
+  C:000DH         LINE#         21
+  C:0022H         LINE#         22
+  -------         ENDPROC       _MSDELAY
+  -------         ENDMOD        TASK_01_B
+
+Program Size: data=9.0 xdata=0 code=69
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

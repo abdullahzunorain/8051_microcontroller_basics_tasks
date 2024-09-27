@@ -1,0 +1,181 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/20/2024  15:12:22  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\task_12_8_appro_03.obj TO .\Objects\Task_12_(h)_appro_03 PRINT (.\Listings\Task_12
+>> _(h)_appro_03.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\task_12_8_appro_03.obj (TASK_12_8_APPRO_03)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\Task_12_(h)_appro_03 (TASK_12_8_APPRO_03)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     003EH     UNIT         ?DT?TASK_12_8_APPRO_03
+            IDATA   0046H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0155H     UNIT         ?PR?_FUN?TASK_12_8_APPRO_03
+            CODE    0158H     008CH     UNIT         ?C_C51STARTUP
+            CODE    01E4H     005AH     UNIT         ?PR?MAIN?TASK_12_8_APPRO_03
+            CODE    023EH     0043H     UNIT         ?C_INITSEG
+            CODE    0281H     002BH     UNIT         ?PR?DELAY?TASK_12_8_APPRO_03
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Task_12_(h)_appro_03 (TASK_12_8_APPRO_03)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TASK_12_8_APPRO_03
+  +--> ?C_INITSEG
+
+?PR?MAIN?TASK_12_8_APPRO_03
+  +--> ?PR?_FUN?TASK_12_8_APPRO_03
+
+?PR?_FUN?TASK_12_8_APPRO_03
+  +--> ?PR?DELAY?TASK_12_8_APPRO_03
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Task_12_(h)_appro_03 (TASK_12_8_APPRO_03)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/20/2024  15:12:22  PAGE 2
+
+
+  -------         MODULE        TASK_12_8_APPRO_03
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  C:0281H         PUBLIC        delay
+  D:0008H         PUBLIC        array
+  C:01E4H         PUBLIC        main
+  D:0012H         PUBLIC        input
+  B:00A0H.4       PUBLIC        A
+  B:00A0H.2       PUBLIC        C
+  C:0003H         PUBLIC        _fun
+  D:0022H         PUBLIC        kk
+  B:00A0H.3       PUBLIC        b
+  D:002EH         PUBLIC        i
+  D:0030H         PUBLIC        message
+  D:0044H         PUBLIC        x
+  D:0045H         PUBLIC        z
+  -------         PROC          MAIN
+  C:01E4H         LINE#         21
+  C:01E4H         LINE#         22
+  C:01E4H         LINE#         23
+  C:01EAH         LINE#         24
+  C:01EFH         LINE#         26
+  C:01F5H         LINE#         27
+  C:01FAH         LINE#         29
+  C:0200H         LINE#         30
+  C:0205H         LINE#         32
+  C:020BH         LINE#         33
+  C:0210H         LINE#         35
+  C:0216H         LINE#         36
+  C:021BH         LINE#         38
+  C:0221H         LINE#         39
+  C:0226H         LINE#         41
+  C:022CH         LINE#         42
+  C:0231H         LINE#         44
+  C:0237H         LINE#         45
+  C:023CH         LINE#         46
+  -------         ENDPROC       MAIN
+  -------         PROC          DELAY
+  C:0281H         LINE#         50
+  C:0281H         LINE#         51
+  C:0296H         LINE#         52
+  C:02ABH         LINE#         53
+  -------         ENDPROC       DELAY
+  -------         PROC          _FUN
+  D:0007H         SYMBOL        x
+  C:0003H         LINE#         56
+  C:0003H         LINE#         57
+  C:0005H         LINE#         59
+  C:0014H         LINE#         60
+  C:0016H         LINE#         61
+  C:0019H         LINE#         62
+  C:001CH         LINE#         63
+  C:0027H         LINE#         64
+  C:0027H         LINE#         66
+  C:0034H         LINE#         67
+  C:0036H         LINE#         68
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/20/2024  15:12:22  PAGE 3
+
+
+  C:0039H         LINE#         69
+  C:003CH         LINE#         70
+  C:0047H         LINE#         71
+  C:0047H         LINE#         73
+  C:0056H         LINE#         74
+  C:0058H         LINE#         75
+  C:005BH         LINE#         76
+  C:005EH         LINE#         77
+  C:0069H         LINE#         78
+  C:0069H         LINE#         80
+  C:0078H         LINE#         81
+  C:007AH         LINE#         82
+  C:007DH         LINE#         83
+  C:0080H         LINE#         84
+  C:008BH         LINE#         85
+  C:008BH         LINE#         87
+  C:009AH         LINE#         88
+  C:009CH         LINE#         89
+  C:009FH         LINE#         90
+  C:00A2H         LINE#         91
+  C:00ADH         LINE#         92
+  C:00ADH         LINE#         94
+  C:00BCH         LINE#         95
+  C:00BEH         LINE#         96
+  C:00C1H         LINE#         97
+  C:00C4H         LINE#         98
+  C:00CFH         LINE#         99
+  C:00CFH         LINE#         101
+  C:00DEH         LINE#         102
+  C:00E0H         LINE#         103
+  C:00E3H         LINE#         104
+  C:00E6H         LINE#         105
+  C:00F1H         LINE#         106
+  C:00F1H         LINE#         108
+  C:0100H         LINE#         109
+  C:0102H         LINE#         110
+  C:0105H         LINE#         111
+  C:0108H         LINE#         112
+  C:0113H         LINE#         113
+  C:0113H         LINE#         115
+  C:0122H         LINE#         116
+  C:0124H         LINE#         117
+  C:0127H         LINE#         118
+  C:012AH         LINE#         119
+  C:0135H         LINE#         120
+  C:0135H         LINE#         122
+  C:0144H         LINE#         123
+  C:0146H         LINE#         124
+  C:0149H         LINE#         125
+  C:014CH         LINE#         126
+  C:0157H         LINE#         127
+  C:0157H         LINE#         129
+  -------         ENDPROC       _FUN
+  -------         ENDMOD        TASK_12_8_APPRO_03
+
+Program Size: data=71.0 xdata=0 code=684
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

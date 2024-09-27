@@ -1,0 +1,357 @@
+C51 COMPILER V9.60.7.0   TASK_12__H_                                                       05/02/2024 15:06:37 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_12__H_
+OBJECT MODULE PLACED IN .\Objects\task_12_(h).obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_12_(h).c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\task_12_(h).lst) TABS(2) OBJECT(.\Objects\task_12_(h).obj)
+
+line level    source
+
+   1          /*
+   2          task_12_part(8):
+   3          2nd approach:
+   4          Make a function called display_num_7seg(long num) which takes any arbitrary number as input, 
+   5          converts it and displays it on the seven segment displays. e.g. If you call  
+   6          long num = 42354245; 
+   7          display_num_7seg(num); 
+   8          The above code should display 42354245 on the seven segment displays. If num = 
+   9          97561654 then the seven segment displays should display 97561654. Do conversion in 
+  10          real time and don’t hard code the number to be displayed.
+  11          
+  12          */
+  13          
+  14          #include <REG52.H>
+  15          
+  16          sbit p1 = P2^2;
+  17          sbit p2 = P2^3;
+  18          sbit p3 = P2^4;
+  19          
+  20          void my_func(int digit);    //func prototype
+  21          void display_num_7seg(long num); //func prototype
+  22          
+  23          
+  24          //timer function(for delay)
+  25          void M0T0delay(void) {
+  26   1        int dell;  
+  27   1        for(dell=0; dell<29; dell++){
+  28   2          TMOD = 0x01;  // 16-bit non-autoreload mode, timer_0, mode_1
+  29   2          TL0 = 0x99; 
+  30   2          TH0 = 0xEF;
+  31   2          TR0 = 1;
+  32   2          while (TF0 == 0);
+  33   2          TR0 = 0;
+  34   2          TF0 = 0;
+  35   2        }
+  36   1      }
+  37          
+  38          
+  39          // main func..
+  40          void main() {
+  41   1        
+  42   1          long num = 93475857;
+  43   1        
+  44   1          while (1) {
+  45   2              display_num_7seg(num);
+  46   2          }
+  47   1      }
+  48          
+  49          //
+  50          void display_num_7seg(long num) {
+  51   1          int i;
+  52   1        
+  53   1          // Loop through each digit position of the number (from right to left)
+  54   1          for (i = 0; i < 8; i++) {
+C51 COMPILER V9.60.7.0   TASK_12__H_                                                       05/02/2024 15:06:37 PAGE 2   
+
+  55   2            // Set the state of display 1 based on whether the current digit position is odd or even
+  56   2            p1 =  i & 0x01;
+  57   2            // Set the state of display 2 based on whether the current digit position is odd or even
+  58   2            p2 = (i >> 1) & 0x01;
+  59   2            // Set the state of display 3 based on whether the current digit position is odd or even
+  60   2            p3 = (i >> 2) & 0x01;
+  61   2            // Show the current digit on the seven-segment display
+  62   2            my_func(num % 10);
+  63   2            // Move to the next digit by dividing the number by 10
+  64   2            num /= 10;
+  65   2            // Introduce a delay to make the displayed digits visible for a short period
+  66   2            M0T0delay();
+  67   2         }
+  68   1      }
+  69          
+  70          void my_func(int digit) {
+  71   1          switch(digit) {
+  72   2              case 0:
+  73   2                  P0 = 0x3F;
+  74   2                  break;
+  75   2              case 1:
+  76   2                  P0 = 0x06;
+  77   2                  break;
+  78   2              case 2:
+  79   2                  P0 = 0x5B;
+  80   2                  break;
+  81   2              case 3:
+  82   2                  P0 = 0x4F;
+  83   2                  break;
+  84   2              case 4:
+  85   2                  P0 = 0x66;
+  86   2                  break;
+  87   2              case 5:
+  88   2                  P0 = 0x6D;
+  89   2                  break;
+  90   2              case 6:
+  91   2                  P0 = 0x7D;
+  92   2                  break;
+  93   2              case 7:
+  94   2                  P0 = 0x07;
+  95   2                  break;
+  96   2              case 8:
+  97   2                  P0 = 0x7F;
+  98   2                  break;
+  99   2              case 9:
+ 100   2                  P0 = 0x6F;
+ 101   2                  break;
+ 102   2          }
+ 103   1      }
+ 104          
+ 105          
+ 106          
+ 107          
+ 108          
+ 109          /*
+ 110          let's break down the `display_num_7seg` function step by step:
+ 111          
+ 112          ```c
+ 113          void display_num_7seg(long num) {
+ 114              int i;
+ 115              for (i=0; i<8; i++) {
+ 116          ```
+C51 COMPILER V9.60.7.0   TASK_12__H_                                                       05/02/2024 15:06:37 PAGE 3   
+
+ 117          This function loops 8 times, representing each digit of the number to be displayed on the 7-segment displa
+             -y. The loop variable `i` is used to keep track of which digit we are currently displaying.
+ 118          
+ 119          ```c
+ 120                  p1 = i & 0x01;
+ 121                  p2 = (i >> 1) & 0x01;
+ 122                  p3 = (i >> 2) & 0x01;
+ 123          ```
+ 124          Inside the loop, we manipulate the `p1`, `p2`, and `p3` special bit variables to control the pins of Port 
+             -2. These pins are typically used to select which 7-segment display to activate in a multi-digit display setup. By settin
+             -g these pins appropriately, we can select the correct display for each digit.
+ 125          
+ 126          - `p1`, `p2`, and `p3` are used to select one of the eight digits (0 to 7) on the display.
+ 127          - The `&` operator is a bitwise AND operation, and `0x01` is a hexadecimal number with a binary representa
+             -tion of `00000001`. When we perform `i & 0x01`, we effectively isolate the least significant bit of `i`.
+ 128          - The `>>` operator is a bitwise right shift operation. By shifting `i` right by 1 or 2 bits, we isolate t
+             -he next two bits of `i` to select the appropriate digit.
+ 129          
+ 130          ```c
+ 131                  my_func(num % 10);
+ 132          ```
+ 133          After selecting the correct display using `p1`, `p2`, and `p3`, we call the `my_func` function to display 
+             -the current digit on that display. We pass `num % 10` as an argument to `my_func` to get the least significant digit of 
+             -`num`. The `%` operator calculates the remainder when `num` is divided by 10, giving us the last digit of the number.
+ 134          
+ 135          ```c
+ 136                  M0T0delay();
+ 137          ```
+ 138          After displaying the digit, we introduce a delay to control the timing of the display. This delay ensures 
+             -that each digit is displayed for a short period before moving on to the next digit.
+ 139          
+ 140          ```c
+ 141                  num /= 10;
+ 142              }
+ 143          }
+ 144          ```
+ 145          Finally, we divide `num` by 10 to remove the least significant digit and prepare for the next iteration of
+             - the loop. This effectively shifts `num` to the right, making the next digit the least significant digit for the next it
+             -eration.
+ 146          
+ 147          Overall, this function iterates through each digit of the input number, selects the appropriate display fo
+             -r each digit, and then calls `my_func` to display the digit on that display. It introduces a delay between each digit to
+             - control the timing of the display.
+ 148          
+ 149          
+ 150          
+ 151          
+ 152          
+ 153          //Sure, let's break it down:
+ 154          
+ 155          //1. **Start of the Function**: This function is called `display_num_7seg` and it's used to show a number 
+             -on a special kind of display called a "7-segment display". This display looks like a number 8 and can show numbers from 
+             -0 to 9.
+ 156          
+ 157          //2. **Looping Through Each Digit**: Imagine you have a long number written on a paper, and you want to sh
+             -ow each digit of that number on the display. This loop helps us do just that. It starts from the first digit (which is t
+             -he rightmost one) and goes up to the eighth digit (which is the leftmost one). We use the variable `i` to keep track of 
+             -which digit we are currently looking at.
+ 158          
+ 159          //3. **Choosing the Right Segment Display**: Now, imagine the display as a bunch of boxes, each labeled wi
+             -th a number from 0 to 7. We need to tell the display which box to light up to show the current digit. That's what these 
+             -lines do:
+C51 COMPILER V9.60.7.0   TASK_12__H_                                                       05/02/2024 15:06:37 PAGE 4   
+
+ 160          //   - `p1 = i & 0x01;`: This line tells the display which box to light up for the ones place of the numbe
+             -r. For example, if `i` is 3, then `p1` will be 1 (because 3 & 1 equals 1).
+ 161          //   - `p2 = (i >> 1) & 0x01;`: This line tells the display which box to light up for the tens place of th
+             -e number. For example, if `i` is 3, then `p2` will be 1 (because 1 & 0 equals 1).
+ 162          //   - `p3 = (i >> 2) & 0x01;`: This line tells the display which box to light up for the hundreds place o
+             -f the number. For example, if `i` is 3, then `p3` will be 0 (because 0 & 0 equals 0).
+ 163          
+ 164          //4. **Showing the Digit**: Now that we've told the display which box to light up, we need to tell it what
+             - number to show in that box. That's where the `my_func` function comes in. It takes the current digit of the number (`nu
+             -m % 10`) and shows it on the display.
+ 165          
+ 166          //5. **Waiting a Bit**: After showing the digit, we wait for a short time (`M0T0delay`) before moving on t
+             -o the next digit. This is like pausing for a moment before flipping to the next page of a book.
+ 167          
+ 168          //6. **Moving to the Next Digit**: Finally, we need to move to the next digit of the number so that we can
+             - show it on the display. We do this by dividing the number by 10 (`num /= 10`). For example, if `num` was 12345, after t
+             -his line it would become 1234, then 123, then 12, and so on.
+ 169          
+ 170          //7. **Looping Again**: We repeat this process for each of the eight digits of the number until we've show
+             -n all of them on the display.
+ 171          
+ 172          //That's how the function works! It's like telling the display which box to light up and then telling it w
+             -hat number to show in that box, one digit at a time.
+ 173          
+ 174          
+ 175          //*/
+ 176          
+ 177          
+ 178          ///*
+ 179          //Explanation of `p1 =  i & 0x01;` line:
+ 180          ////
+ 181          //Sure! Let's break it down in a simple way:
+ 182          
+ 183          //Imagine we have two numbers, `i` and `0x01`.
+ 184          
+ 185          //- `i` represents the current digit we're looking at. For example, if `i` is 3, it means we're currently 
+             -looking at the digit 3.
+ 186          //- `0x01` is a special number that looks like this in binary: `00000001`.
+ 187          
+ 188          //Now, let's use a simple example:
+ 189          
+ 190          //- If `i` is 3 and we do `i & 0x01`, it's like saying "compare the binary digits of `i` and `0x01` and on
+             -ly keep the bits that are the same in both numbers".
+ 191          
+ 192          //Let's see it step by step:
+ 193          
+ 194          //- `i` in binary is `00000011` (because 3 is represented as `11` in binary).
+ 195          //- `0x01` in binary is `00000001`.
+ 196          
+ 197          //Now, we compare each digit (bit) of `i` with the corresponding bit of `0x01`:
+ 198          
+ 199          //- The first bit of `i` is `0`, and the first bit of `0x01` is `1`. They are different, so the result of 
+             -the comparison is `0`.
+ 200          //- The second bit of `i` is `1`, and the second bit of `0x01` is `1`. They are the same, so the result of
+             - the comparison is `1`.
+ 201          
+ 202          //So, when we do `i & 0x01`, we get `00000001`, which is `1` in decimal.
+ 203          
+ 204          //This means that if `i` is an odd number, the result will be `1`, and if `i` is an even number, the resul
+             -t will be `0`.
+ 205          
+ 206          //In summary, `p1 = i & 0x01` is a way to check if the current digit is odd or even, and it sets `p1` acco
+C51 COMPILER V9.60.7.0   TASK_12__H_                                                       05/02/2024 15:06:37 PAGE 5   
+
+             -rdingly.
+ 207          ////
+ 208          
+ 209          
+ 210          //// explanation of this line of code==> `p2 = (i >> 1) & 0x01;`
+ 211          
+ 212          //Sure! Let's break it down in a simple way:
+ 213          
+ 214          //Imagine we have two numbers, `i` and `0x01`.
+ 215          
+ 216          //- `i` represents the current digit we're looking at. For example, if `i` is 3, it means we're currently 
+             -looking at the digit 3.
+ 217          //- `0x01` is a special number that looks like this in binary: `00000001`.
+ 218          
+ 219          //Now, let's use a simple example:
+ 220          
+ 221          //- If `i` is 3 and we do `i >> 1`, it's like saying "shift all the digits of `i` to the right by one plac
+             -e".
+ 222          
+ 223          //Let's see it step by step:
+ 224          
+ 225          //- `i` in binary is `00000011` (because 3 is represented as `11` in binary).
+ 226          //- If we shift it to the right by one place, we get `00000001`.
+ 227          
+ 228          //So, when we do `(i >> 1)`, we get `00000001`, which is `1` in decimal.
+ 229          
+ 230          //Now, let's move to the next part: `& 0x01`.
+ 231          
+ 232          //- We already have `00000001` from the previous step.
+ 233          //- `0x01` in binary is `00000001`.
+ 234          
+ 235          //Now, we compare each digit (bit) of `00000001` with the corresponding bit of `00000001`:
+ 236          
+ 237          //- The first bit of `00000001` is `1`, and the first bit of `00000001` is `1`. They are the same, so the 
+             -result of the comparison is `1`.
+ 238          
+ 239          //So, when we do `(i >> 1) & 0x01`, we still get `00000001`, which is `1` in decimal.
+ 240          
+ 241          //This means that `p2` will be `1` if the current digit is odd and `0` if it's even. It helps to determine
+             - which display to light up for the tens place of the number.
+ 242          
+ 243          //// Explanation of this line of code =>  `p3 = (i >> 2) & 0x01;` : 
+ 244          
+ 245          //Alright! Let's break it down step by step:
+ 246          
+ 247          //1. **Shifting `i` to the Right by 2 Places**: 
+ 248          //   - Imagine `i` is a number represented in binary. For example, if `i` is 5, in binary it would be `000
+             -00101`.
+ 249          //   - When we do `i >> 2`, it means we are shifting all the digits of `i` to the right by 2 places. So, `
+             -00000101` becomes `00000001`.
+ 250          
+ 251          //2. **Logical AND Operation with `0x01`**:
+ 252          //   - Now, we take the result of the shifting operation (`00000001`) and perform a logical AND operation 
+             -with `0x01`.
+ 253          //   - `0x01` is represented in binary as `00000001`.
+ 254          //   - In a logical AND operation, if both bits are 1, the result is 1. Otherwise, the result is 0.
+ 255          //   
+ 256          //So, let's compare each bit:
+ 257          
+ 258          //- The first bit of `00000001` is `1`, and the first bit of `00000001` is `1`. They are the same, so the 
+             -result of the comparison is `1`.
+ 259          
+C51 COMPILER V9.60.7.0   TASK_12__H_                                                       05/02/2024 15:06:37 PAGE 6   
+
+ 260          //Therefore, the result of `(i >> 2) & 0x01` would be `00000001`, which is `1` in decimal.
+ 261          
+ 262          //This means that `p3` will be `1` if the current digit is odd and `0` if it's even. It helps to determine
+             - which display to light up for the hundreds place of the number.
+ 263          
+ 264          //*/
+ 265          
+ 266          //void display_num_7seg(long num) {
+ 267          //    int i;
+ 268          //  
+ 269          //    for (i=0; i<8; i++) {
+ 270          //        p1 =  i & 0x01;
+ 271          //        p2 = (i >> 1) & 0x01;
+ 272          //        p3 = (i >> 2) & 0x01;
+ 273          //      
+ 274          //        my_func(num % 10);
+ 275          //        num /= 10;
+ 276          //        M0T0delay();      
+ 277          //    }
+ 278          
+ 279          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    262    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

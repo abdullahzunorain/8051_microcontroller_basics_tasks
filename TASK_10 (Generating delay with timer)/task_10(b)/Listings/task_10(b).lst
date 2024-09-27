@@ -1,0 +1,80 @@
+C51 COMPILER V9.60.7.0   TASK_10_B_                                                        09/20/2024 12:52:25 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_10_B_
+OBJECT MODULE PLACED IN .\Objects\task_10(b).obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_10(b).c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\task_10(b).lst) TABS(2) OBJECT(.\Objects\task_10(b).obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          
+   3          int cntr_100ms = 0;         
+   4          int cntr_1000ms = 0; 
+   5          int flag_100_ms = 0; 
+   6          int flag_1000_ms = 0; 
+   7          
+   8          sbit LED_D1 = P2^0;      
+   9          sbit LED_D2 = P2^1;      
+  10          sbit LED_D3 = P2^2;      
+  11          sbit LED_D4 = P2^3;      
+  12          
+  13          
+  14          
+  15          void ISR_timer0(void) interrupt 1{  
+  16   1        cntr_100ms++; 
+  17   1        cntr_1000ms++; 
+  18   1          if (cntr_100ms >= 600){
+  19   2            LED_D1 =~ LED_D1 ;            
+  20   2            flag_100_ms = 1;            
+  21   2            cntr_100ms = 0;
+  22   2          }
+  23   1        
+  24   1          if (cntr_1000ms >= 1500){
+  25   2            LED_D2 =~ LED_D2;
+  26   2            cntr_1000ms = 0; 
+  27   2            flag_1000_ms = 1;
+  28   2         }
+  29   1      }
+  30           
+  31          
+  32          
+  33          void main (void){
+  34   1        
+  35   1        EA = 1;    // Global Enable (Enable All)
+  36   1        ET0 = 1;   // enable Interrupt timer 0
+  37   1        TMOD = 0x02; // timer_0 , mode_2 -> (8-bit_auto_reload timer)
+  38   1        TH0 = 0xC6;  // define a value
+  39   1        TR0 = 1;   // Start timer_0
+  40   1        
+  41   1       while(1) 
+  42   1      { 
+  43   2         if(flag_100_ms) { 
+  44   3              flag_100_ms = 0; 
+  45   3              LED_D3 = ~LED_D3;
+  46   3           } 
+  47   2       
+  48   2      
+  49   2         if(flag_1000_ms){ 
+  50   3              flag_1000_ms = 0; 
+  51   3              LED_D4 = ~LED_D4; 
+  52   3           }
+  53   2      } 
+  54   1      } 
+C51 COMPILER V9.60.7.0   TASK_10_B_                                                        09/20/2024 12:52:25 PAGE 2   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    119    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

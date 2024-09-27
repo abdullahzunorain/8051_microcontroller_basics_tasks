@@ -1,0 +1,148 @@
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:16:18 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TASK_12__G_
+OBJECT MODULE PLACED IN .\Objects\task_12_(g).obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE task_12_(g).c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\task_12_(g).lst) TABS(2) OBJECT(.\Objects\task_12_(g).obj)
+
+line level    source
+
+   1          /*
+   2          
+   3          Task_12_Part(8):
+   4          Make a function called display_num_7seg(long num) which takes any arbitrary number as input,
+   5          converts it and displays it on the seven segment displays. 
+   6          
+   7          e.g. If you call long num = 42354245; display_num_7seg(num); 
+   8          
+   9          The above code should display 42354245 on the seven segment displays.
+  10          If num = 97561654 then the seven segment displays should display 97561654. 
+  11          Do conversion in real time and don’t hard code the number to be displayed.
+  12          
+  13          */
+  14          
+  15          #include <reg52.h>
+  16          
+  17          sbit p1 = P2^2;
+  18          sbit p2 = P2^3;
+  19          sbit p3 = P2^4;
+  20          
+  21          void my_func(int my_array[], int x);
+  22          #define Port_0 P0
+  23          int my_array[]={8,1,2,6,7,9,9,2};
+  24          
+  25          void M0T0delay(void){
+  26   1        
+  27   1          TMOD = 0x01;  // 16-bit non-autoreload mode, timer_0, mode_1
+  28   1          TL0 = 0x99; 
+  29   1          TH0 = 0xEF;
+  30   1          TR0 = 1;
+  31   1          while(TF0==0);
+  32   1          TR0 = 0;
+  33   1          TF0 = 0;
+  34   1      }
+  35          
+  36          void main(){
+  37   1        while(1){
+  38   2          
+  39   2          //display1
+  40   2          p1=1; p2=1; p3=1;
+  41   2          my_func(my_array, 0);
+  42   2          M0T0delay();
+  43   2      //    M0T0delay();
+  44   2          
+  45   2          //display2
+  46   2          p1=0; p2=1; p3=1;
+  47   2          my_func(my_array, 1);
+  48   2          M0T0delay();
+  49   2      //    M0T0delay();
+  50   2          
+  51   2          //display3
+  52   2          p1=1; p2=0; p3=1;
+  53   2          my_func(my_array, 2);
+  54   2          M0T0delay();
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:16:18 PAGE 2   
+
+  55   2      //    M0T0delay();
+  56   2          
+  57   2          //display4
+  58   2          p1=0; p2=0; p3=1;
+  59   2          my_func(my_array, 3);
+  60   2          M0T0delay();
+  61   2      //    M0T0delay();
+  62   2          
+  63   2          //display5
+  64   2          p1=1; p2=1; p3=0;
+  65   2          my_func(my_array, 4);
+  66   2          M0T0delay();
+  67   2      //    M0T0delay();
+  68   2          
+  69   2          //display6
+  70   2          p1=0; p2=1; p3=0;
+  71   2          my_func(my_array, 5);
+  72   2          M0T0delay();
+  73   2      //    M0T0delay();
+  74   2          
+  75   2          //display7
+  76   2          p1=1; p2=0; p3=0;
+  77   2          my_func(my_array, 6);
+  78   2          M0T0delay();
+  79   2      //    M0T0delay();
+  80   2          
+  81   2          //display8
+  82   2          p1=0; p2=0; p3=0;
+  83   2          my_func(my_array, 7);
+  84   2          M0T0delay();
+  85   2      //    M0T0delay();
+  86   2        }
+  87   1      }
+  88          
+  89          void my_func(int my_array[], int x){
+  90   1            if(my_array[x] == 0){
+  91   2            Port_0=0x3F;
+  92   2            }
+  93   1            else if(my_array[x] == 1){
+  94   2            Port_0=0x06;
+  95   2            }
+  96   1            else if(my_array[x] == 2){
+  97   2            Port_0=0x5B;
+  98   2            }
+  99   1            else if(my_array[x] == 3){
+ 100   2            Port_0=0x4F;
+ 101   2            }
+ 102   1            else if(my_array[x] == 4){
+ 103   2            Port_0=0x66;
+ 104   2            }
+ 105   1            else if(my_array[x] == 5){
+ 106   2            Port_0=0x6D;
+ 107   2            }
+ 108   1            else if(my_array[x] == 6){
+ 109   2            Port_0=0x7D;
+ 110   2            }
+ 111   1            else if(my_array[x] == 7){
+ 112   2            Port_0=0x07;
+ 113   2            }
+ 114   1            else if(my_array[x] == 8){
+ 115   2            Port_0=0x7F;
+ 116   2            }
+C51 COMPILER V9.60.7.0   TASK_12__G_                                                       09/20/2024 15:16:18 PAGE 3   
+
+ 117   1            else if(my_array[x] == 9){
+ 118   2            Port_0=0x6F;
+ 119   2            }
+ 120   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    302    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

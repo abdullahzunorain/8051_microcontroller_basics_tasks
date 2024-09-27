@@ -1,3 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+_Getintopc.com_Keil_MDK_v5.39.rar filter=lfs diff=lfs merge=lfs -text
